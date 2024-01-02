@@ -1,0 +1,9 @@
+
+
+
+const TEXT_HUGE_SIZE = 20.0;
+const TEXT_TITLE_SIZE = 18.0;
+const TEXT_LARGE_SIZE = 16.0;
+const TEXT_NORMAL_SIZE = 14.0;
+const TEXT_SMALL_SIZE = 12.0;
+const TEXT_TINY_SIZE = 10.0;

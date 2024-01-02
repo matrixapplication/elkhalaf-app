@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CLIENT_ID</key>
+    <string>541616388056-d7l9l0f8rhjmi80n4dqo1vs9sukmfftf.apps.googleusercontent.com</string>
+    <key>REVERSED_CLIENT_ID</key>
+    <string>com.googleusercontent.apps.541616388056-d7l9l0f8rhjmi80n4dqo1vs9sukmfftf</string>
+    <key>ANDROID_CLIENT_ID</key>
+    <string>541616388056-0n20isvc0sg2b3sg02p0e2ticdaai0ko.apps.googleusercontent.com</string>
+    <key>API_KEY</key>
+    <string>AIzaSyAOSzCfnoHZeV4LckxZOzyf5JllqP8irtU</string>
+    <key>GCM_SENDER_ID</key>
+    <string>541616388056</string>
+    <key>PLIST_VERSION</key>
+    <string>1</string>
+    <key>BUNDLE_ID</key>
+    <string>com.matrixclouds.elkhalafsheeps</string>
+    <key>PROJECT_ID</key>
+    <string>matrixclouds-apps</string>
+    <key>STORAGE_BUCKET</key>
+    <string>matrixclouds-apps.appspot.com</string>
+    <key>IS_ADS_ENABLED</key>
+    <false></false>
+    <key>IS_ANALYTICS_ENABLED</key>
+    <false></false>
+    <key>IS_APPINVITE_ENABLED</key>
+    <true></true>
+    <key>IS_GCM_ENABLED</key>
+    <true></true>
+    <key>IS_SIGNIN_ENABLED</key>
+    <true></true>
+    <key>GOOGLE_APP_ID</key>
+    <string>1:541616388056:ios:a39bd3c688c9f15a3524ad</string>
+</dict>
+</plist>

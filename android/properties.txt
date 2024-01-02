@@ -1,0 +1,1 @@
+storePassword=matrixClouds keyPassword=matrixClouds keyAlias=key storeFile=E:/alkhalaf/alkhalaf.jks
