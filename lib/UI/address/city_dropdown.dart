@@ -33,7 +33,7 @@ class CityDropDown extends StatelessWidget {
     }
 
     return DropdownButtonFormField<String>(
-      autovalidate: false,
+      autovalidateMode: AutovalidateMode.disabled,
       isDense: true,
       decoration: InputDecoration(
         icon: Icon(Icons.location_city),

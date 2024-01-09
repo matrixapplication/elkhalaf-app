@@ -17,13 +17,12 @@ class SplashScreen extends StatefulWidget {
   SplashScreenState createState() => new SplashScreenState();
 }
 
-class SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
-  int splashTime = 2500;
+class SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+  
   late AnimationController animationController;
   late Animation<double> animation;
   ProfileModel profileModel = new ProfileModel();
-  var _scaffold = GlobalKey<ScaffoldState>();
+  var _scaffold = GlobalKey<ScaffoldMessengerState>();
 
   init() async {
     String navigateToId = HomeController.id;
@@ -50,34 +49,34 @@ class SplashScreenState extends State<SplashScreen>
 
     try {
       await NetworkRequests().main(context);
+        print('not error 1');
 
       animationController.dispose();
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil(navigateToId, (route) => false);
+              print('not error 2');
+
+      Navigator.of(context).pushNamedAndRemoveUntil(navigateToId, (Route<dynamic> route) => false);
+          print('not error 3');
+
     } catch (e) {
       if (e == 'network') {
+        print('network error');
         YemSnackBar().showNoInternetConnection(
             scaffoldKey: _scaffold,
-            function: () {
-              init();
-            },
+            function: () {  init(); },
             durationInSeconds: 1000);
       } else {
+        
+        print('some error $e');
         YemSnackBar().showServerErrorConnection(
             scaffoldKey: _scaffold,
-            function: () {
-              init();
-            },
+            function: () {init();},
             durationInSeconds: 1000);
       }
     }
   }
 
   void navigationPage() {
-
-
-    MainDataProvider mainDataProvider =
-        Provider.of<MainDataProvider>(context, listen: false);
+    MainDataProvider mainDataProvider = Provider.of<MainDataProvider>(context, listen: false);
     if (mainDataProvider == null) {
     } else {}
   }
@@ -92,7 +91,7 @@ class SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: splashTime));
+        vsync: this, duration: Duration(milliseconds: 2500));
 
     animation = new CurvedAnimation(
         parent: animationController, curve: Curves.fastOutSlowIn);
@@ -100,7 +99,7 @@ class SplashScreenState extends State<SplashScreen>
     animation.addListener(() => this.setState(() {}));
     animationController.forward();
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) => init());
+    WidgetsBinding.instance.addPostFrameCallback((_) => init());
   }
 
   @override

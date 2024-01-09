@@ -93,8 +93,10 @@ class _VerificationCodeControllerState
               controller: _verificationController,
             ),
           ),
-          RaisedButton(
-            color: kPrimaryColor,
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor), // Set the background color
+            ),
             onPressed: () {},
             child: Text(
               YemString.verify,

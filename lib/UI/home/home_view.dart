@@ -48,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
                   // Special products offers
                   if (data.mainData!.products != null && data.mainData!.products!.where((element) => element.showInSpecialOffer!).length > 0) SpecialProductsOffer(),
 
-                  SizedBox(height: 120)
+                  SizedBox(height: 20)
                 ],
               ),
             ),

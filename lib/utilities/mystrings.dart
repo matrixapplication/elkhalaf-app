@@ -9,7 +9,7 @@ class YemString {
   static String forgetPassword = 'نسيت كلمة السر؟';
   static String login = 'الدخول';
   static String login_title = 'مرحبا بعودتك';
-  static String doNotHaveAnAccount = 'لا تمتك حساب؟';
+  static String doNotHaveAnAccount = 'لا تملك حساب؟';
   static String register = 'التسجيل';
   static String register_title = 'تسجيل حساب جديد';
   static String continuez = 'المتابعة';

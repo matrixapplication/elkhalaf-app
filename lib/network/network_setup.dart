@@ -8,10 +8,9 @@ Future<Dio> networkHeaderSetup(bool requireAuth,{int timeout = 12}) async {
   YemenyPrefs prefs = YemenyPrefs();
   String? token = await prefs.getToken();
   String lang ='ar';
-  if (lang == null) lang = 'ar';
 
   Dio dio = new Dio();
-  dio.options.connectTimeout = timeout*1000;
+  dio.options.connectTimeout = Duration(milliseconds: timeout * 1000);
   dio.interceptors.add(LogInterceptor(responseBody: true));
   dio.options.headers['content-Type'] = 'application/json';
   dio.options.headers['Content-Language'] = lang;
@@ -28,26 +27,29 @@ Future<Dio> networkHeaderSetup(bool requireAuth,{int timeout = 12}) async {
 
 String networkHandleError(DioError error) {
   switch (error.type) {
-    case DioErrorType.connectTimeout:
+    case DioErrorType.connectionTimeout:
       Echo('e1 DioErrorType.CONNECT_TIMEOUT');
       return 'network';
-      break;
     case DioErrorType.receiveTimeout:
       Echo('e1 DioErrorType.RECEIVE_TIMEOUT');
       return 'network';
-      break;
     case DioErrorType.sendTimeout:
       Echo('e1 DioErrorType.SEND_TIMEOUT');
       return 'network';
-      break;
-    case DioErrorType.response:
+    case DioErrorType.badResponse:
       Echo('e1 DioErrorType.RESPONSE');
       // return 'server';
       break;
     case DioErrorType.cancel:
       Echo('e1 DioErrorType.CANCEL');
       break;
-    case DioErrorType.other:
+    case DioErrorType.unknown:
+      break;
+    case DioExceptionType.badCertificate:
+      // TODO: Handle this case.
+      break;
+    case DioExceptionType.connectionError:
+      // TODO: Handle this case.
       break;
   }
   Echo('dio catch error -> ${error.type}');

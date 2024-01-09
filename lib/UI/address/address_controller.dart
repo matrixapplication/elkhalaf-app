@@ -21,7 +21,7 @@ class AddressController extends StatefulWidget {
 class _AddressControllerState extends State<AddressController> {
 //  AddressModel model;
   bool _loading = false;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final _formKey = GlobalKey<FormState>();
   List<City> cityList = [];
 

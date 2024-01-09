@@ -15,12 +15,12 @@ class EditText extends StatelessWidget {
   final Color color;
   final Color backgroundColor;
   final Color hintColor;
-  final bool autoValidate;
+  final AutovalidateMode? autoValidate;
   final TextInputType type;
   final List<TextInputFormatter>? formatter;
 
   EditText({
-    this.autoValidate = false,
+    this.autoValidate,
     this.updateFunc,
     this.backgroundColor = ACCENT_COLOR_DARK ,
     this.validateFunc,
@@ -47,7 +47,7 @@ class EditText extends StatelessWidget {
         border: Border.all(color: color, width: 0.4),
       ),
       child: TextFormField(
-        autovalidate: autoValidate,
+        autovalidateMode: autoValidate ?? AutovalidateMode.disabled,
         initialValue: value,
         style: TextStyle(color: color),
         decoration: InputDecoration(

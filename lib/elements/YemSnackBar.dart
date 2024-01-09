@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:alkhalafsheep/utilities/mystrings.dart';
 
 class YemSnackBar {
   void showServerErrorConnection(
       {Function? function,
-      required GlobalKey<ScaffoldState> scaffoldKey,
+      required GlobalKey<ScaffoldMessengerState> scaffoldKey,
       int durationInSeconds = 4}) {
     SnackBar snackBar;
     if (function != null)
@@ -22,12 +23,12 @@ class YemSnackBar {
         duration: Duration(seconds: durationInSeconds),
       );
 
-    scaffoldKey.currentState!.showSnackBar(snackBar);
+    scaffoldKey.currentState?.showSnackBar(snackBar);
   }
 
   void showNoInternetConnection(
       {Function? function,
-      required GlobalKey<ScaffoldState> scaffoldKey,
+      required GlobalKey<ScaffoldMessengerState> scaffoldKey,
       int durationInSeconds = 4}) {
     SnackBar snackBar;
     if (function != null)
@@ -44,17 +45,17 @@ class YemSnackBar {
         content: Text(YemString.noInternetConnection),
         duration: Duration(seconds: durationInSeconds),
       );
-    scaffoldKey.currentState!.showSnackBar(snackBar);
+    scaffoldKey.currentState?.showSnackBar(snackBar);
   }
 
   void showSnackBarMessage(
       {required String text,
-      required GlobalKey<ScaffoldState> scaffoldKey,
+      required GlobalKey<ScaffoldMessengerState> scaffoldKey,
       int durationInSeconds = 4}) {
     SnackBar snackBar = SnackBar(
       content: Text(text),
       duration: Duration(seconds: durationInSeconds),
     );
-    scaffoldKey.currentState!.showSnackBar(snackBar);
+    scaffoldKey.currentState?.showSnackBar(snackBar);
   }
 }

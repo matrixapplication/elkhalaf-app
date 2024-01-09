@@ -214,11 +214,11 @@ class _ExpansionTileCustomRattingState extends State<ExpansionTileCustomRatting>
     _borderColorTween
       ..end = theme.dividerColor;
     _headerColorTween
-      ..begin = theme.textTheme.subhead!.color
-      ..end = theme.accentColor;
+      ..begin = theme.primaryColor
+      ..end = theme.hintColor;
     _iconColorTween
       ..begin = theme.unselectedWidgetColor
-      ..end = theme.accentColor;
+      ..end = theme.primaryColor;
     _backgroundColorTween
       ..end = widget.backgroundColor;
     super.didChangeDependencies();

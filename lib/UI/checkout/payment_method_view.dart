@@ -1,3 +1,4 @@
+import 'package:alkhalafsheep/elements/alerts.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,6 @@ import 'package:alkhalafsheep/provider/cart_provider.dart';
 import 'package:alkhalafsheep/utilities/constants.dart';
 import 'package:alkhalafsheep/utilities/mystrings.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
 class PaymentMethodView extends StatefulWidget {
   final List<SinglePayment>? list;
@@ -141,14 +141,14 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
               padding: const EdgeInsets.all(8.0),
               child: checkoutRequestLoading
                   ? Center(
-                    child: Container(
-                        width: 30,
-                        height: 30,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 0.8,
-                          backgroundColor: Colors.white,
-                        )),
-                  )
+                      child: Container(
+                          width: 30,
+                          height: 30,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 0.8,
+                            backgroundColor: Colors.white,
+                          )),
+                    )
                   : Center(
                       child: Text(
                         YemString.continuez,
@@ -169,17 +169,19 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
       CheckoutResponse response = await checkoutRequest(context);
       checkoutRequestLoading = false;
       setState(() {});
-      Navigator.of(context).pushNamed(CheckoutController.id,arguments: response);
+      Navigator.of(context)
+          .pushNamed(CheckoutController.id, arguments: response);
     } catch (e) {
       if (e == 'network') {
-        Toast.show(YemString.noInternetConnection,
-            duration: Toast.lengthShort, gravity: Toast.bottom);
+        Alerts.showToast(YemString.noInternetConnection);
       } else if (e == 'server') {
-        Toast.show(YemString.server_error,
-            duration: Toast.lengthShort, gravity: Toast.bottom);
+        Alerts.showToast(YemString.server_error);
+        // Toast.show(YemString.server_error,
+        //     duration: Toast.lengthShort, gravity: Toast.bottom);
       } else {
-        Toast.show('${e}',
-            duration: Toast.lengthShort, gravity: Toast.bottom);
+        Alerts.showToast(e.toString());
+        // Toast.show('${e}',
+        //     duration: Toast.lengthShort, gravity: Toast.bottom);
       }
     }
     checkoutRequestLoading = false;

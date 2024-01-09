@@ -1,3 +1,4 @@
+import 'package:alkhalafsheep/elements/alerts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:alkhalafsheep/UI/checkout/success_create_order_view.dart';
@@ -6,7 +7,6 @@ import 'package:alkhalafsheep/network/create_order_request.dart';
 import 'package:alkhalafsheep/network_models/checkout_response.dart';
 import 'package:alkhalafsheep/utilities/constants.dart';
 import 'package:alkhalafsheep/utilities/mystrings.dart';
-import 'package:toast/toast.dart';
 
 class CheckoutController extends StatefulWidget {
   static const String id = 'checkout';
@@ -367,14 +367,17 @@ class _CheckoutControllerState extends State<CheckoutController> {
       Navigator.of(context).pushNamed(SuccessCreateOrderView.id);
     } catch (e) {
       if (e == 'network') {
-        Toast.show(YemString.noInternetConnection,
-            duration: Toast.lengthShort, gravity: Toast.bottom);
+        Alerts.showToast(YemString.noInternetConnection);
+        // Toast.show(YemString.noInternetConnection,
+        //     duration: Toast.lengthShort, gravity: Toast.bottom);
       } else if (e == 'server') {
-        Toast.show(YemString.server_error,
-            duration: Toast.lengthShort, gravity: Toast.bottom);
+        Alerts.showToast(YemString.server_error);
+        // Toast.show(YemString.server_error,
+        //     duration: Toast.lengthShort, gravity: Toast.bottom);
       } else {
-        Toast.show('${e}',
-            duration: Toast.lengthShort, gravity: Toast.bottom);
+        Alerts.showToast(e.toString());
+        // Toast.show('${e}',
+            // duration: Toast.lengthShort, gravity: Toast.bottom);
       }
     }
     createOrderLoading = false;

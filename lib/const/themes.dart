@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 abstract class LightThemeColors {
   static Color get background => const Color(0xFFFFFFFF);
   static Color get textPrimaryColor => const Color(0xFF000000);
-  static Color get accentColor => const Color(0xFFE8CBA6);
-  static Color get accentColorLight => const Color(0xFFFFE7C9);
+  static Color get highEmphasisOnAccent => const Color(0xFFE8CBA6);
+  static Color get highEmphasisOnAccentLight => const Color(0xFFFFE7C9);
   static Color get primaryColor => Color(0xff34313B);
 
 }
@@ -12,7 +12,7 @@ abstract class LightThemeColors {
 abstract class DarkThemeColors {
   static Color get background => const Color(0xFF000000);
   static Color get textPrimaryColor => const Color(0xFFE1E1E1);
-  static Color get accentColor => const Color(0xFFC7482A);
+  static Color get highEmphasisOnAccent => const Color(0xFFC7482A);
   static Color get primaryColor =>Colors.red;
 }
 
@@ -57,16 +57,16 @@ abstract class AppColors {
     dark: DarkThemeColors.primaryColor,
   ).getColor(context);
 
-  static Color accentColor(BuildContext context) => ThemedColor(
-    light: LightThemeColors.accentColor,
-    dark: DarkThemeColors.accentColor,
+  static Color highEmphasisOnAccent(BuildContext context) => ThemedColor(
+    light: LightThemeColors.highEmphasisOnAccent,
+    dark: DarkThemeColors.highEmphasisOnAccent,
   ).getColor(context);
 }
 
 
 final Map<ThemeMode, ThemeData> appThemes = {
   ThemeMode.light: ThemeData(
-    accentColor: LightThemeColors.accentColor,
+    hintColor: LightThemeColors.highEmphasisOnAccent,
     primarySwatch:LightThemeColors.primaryColor as MaterialColor?,
     primaryColor: LightThemeColors.primaryColor,
     scaffoldBackgroundColor: LightThemeColors.background,
@@ -74,7 +74,7 @@ final Map<ThemeMode, ThemeData> appThemes = {
 
   ),
   ThemeMode.dark: ThemeData(
-    accentColor: DarkThemeColors.accentColor,
+    hintColor: DarkThemeColors.highEmphasisOnAccent,
     primarySwatch:DarkThemeColors.primaryColor as MaterialColor?,
     primaryColor: DarkThemeColors.primaryColor,
     scaffoldBackgroundColor: DarkThemeColors.background,

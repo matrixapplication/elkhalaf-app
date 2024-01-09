@@ -27,7 +27,7 @@ class RegisterController extends StatefulWidget {
 class _RegisterControllerState extends State<RegisterController> {
   RegisterModel? model;
   bool _loading = false;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final _formKey = GlobalKey<FormState>();
 
   @override

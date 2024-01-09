@@ -46,7 +46,7 @@ class _AboutPolicyControllerState extends State<AboutPolicyController> {
                       ...snapshot.data!.data!.map((e) {
                         return HtmlWidget(
                           snapshot.data!.data!.first.content!,
-                          onTapUrl: (url) => showDialog(
+                          onTapUrl: (url) async=> await showDialog(
                             context: context,
                             builder: (_) => AlertDialog(
                               title: Text('onTapUrl'),

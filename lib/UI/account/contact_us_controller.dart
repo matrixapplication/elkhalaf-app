@@ -1,8 +1,7 @@
-import 'package:alkhalafsheep/elements/edit_text.dart';
+import 'package:alkhalafsheep/elements/alerts.dart';
 import 'package:alkhalafsheep/models/profile_model.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:avatar_glow/avatar_glow.dart';
-import 'package:flutter/painting.dart';
 import 'package:alkhalafsheep/_helpers/shared_pref.dart';
 import 'package:alkhalafsheep/components/loading_widget.dart';
 import 'package:alkhalafsheep/network/apis.dart';
@@ -12,8 +11,9 @@ import 'package:alkhalafsheep/utilities/echo.dart';
 import 'package:alkhalafsheep/utilities/mystrings.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-// import 'package:social_media_buttons/social_media_button.dart';
+import 'package:social_media_buttons/social_media_button.dart';
 import 'email_edit_text.dart';
 import 'message_edit_text.dart';
 import 'name_edit_text.dart';
@@ -38,25 +38,9 @@ class _ContactUsState extends State<ContactUs> {
   String inputName = '';
   String inputMessage = '';
 
-  updatePhoneOnFormSave(String text) {
-    inputPhone = text;
-  }
-
-  updateEmailOnFormSave(String text) {
-    inputEmail = text;
-  }
-
-  updateNameOnFormSave(String text) {
-    inputName = text;
-  }
-
-  updateMessageOnFormSave(String text) {
-    inputMessage = text;
-  }
-
   @override
   Widget build(BuildContext context) {
-     profileModel = Provider.of<ProfileModel>(context, listen: false);
+    profileModel = Provider.of<ProfileModel>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(YemString.contact_us, style: kWhiteTextColor),
@@ -68,94 +52,89 @@ class _ContactUsState extends State<ContactUs> {
       body: _loading
           ? LoadingWidget(isItProgressIndicator: true)
           : SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: 4),
-//                Padding(
-//                  padding: const EdgeInsets.all(16.0),
-//                  child: Text('اقتراحتكم تهمنا وتدفعنا الي التميز والتطور ، فلا تبخلوا علينا . نحن في انتظاركم',textAlign: TextAlign.center,),
-//                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: contactFormLayout(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      // Flexible(
-                      //   flex: 1,
-                      //   child: AvatarGlow(
-                      //     glowColor: Colors.blue[900],
-                      //     endRadius: 40.0,
-                      //     child: Material(
-                      //       elevation: 8.0,
-                      //       shape: CircleBorder(),
-                      //       child: SocialMediaButton.snapchat(
-                      //         url: '',
-                      //         size: 35,
-                      //         color: Colors.blue[900],
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Flexible(
-                      //   flex: 1,
-                      //   child: AvatarGlow(
-                      //     glowColor: Colors.blue,
-                      //     endRadius: 40.0,
-                      //     child: Material(
-                      //       elevation: 8.0,
-                      //       shape: CircleBorder(),
-                      //       child: SocialMediaButton.twitter(
-                      //         url: '',
-                      //         size: 35,
-                      //         color: Colors.blue,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Flexible(
-                      //   flex: 1,
-                      //   child: AvatarGlow(
-                      //     glowColor: Colors.blue,
-                      //     endRadius: 40.0,
-                      //     child: Material(
-                      //       elevation: 8.0,
-                      //       shape: CircleBorder(),
-                      //       child: SocialMediaButton.instagram(
-                      //         url: '',
-                      //         size: 35,
-                      //         color: Colors.blue,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      // Flexible(
-                      //   flex: 1,
-                      //   child: AvatarGlow(
-                      //     glowColor: Colors.green,
-                      //     endRadius: 40.0,
-                      //     child: Material(
-                      //       elevation: 8.0,
-                      //       shape: CircleBorder(),
-                      //       child: SocialMediaButton.whatsapp(
-                      //         url: '',
-                      //         size: 35,
-                      //         color: Colors.green,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 4),
+              //  Padding(
+              //    padding: const EdgeInsets.all(16.0),
+              //    child: Text('اقتراحتكم تهمنا وتدفعنا الي التميز والتطور ، فلا تبخلوا علينا . نحن في انتظاركم',textAlign: TextAlign.center,),
+              //  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: contactFormLayout(),
                   ),
-                ),
-
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Flexible(
+                          flex: 1,
+                          child: AvatarGlow(
+                            glowColor: Color(0xFF0D47A1),
+                            child: Material(
+                              elevation: 8.0,
+                              shape: CircleBorder(),
+                              child: SocialMediaButton.snapchat(
+                                url: '',
+                                size: 35,
+                                color: Colors.blue[900],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: AvatarGlow(
+                            glowColor: Colors.blue,
+                            child: Material(
+                              elevation: 8.0,
+                              shape: CircleBorder(),
+                              child: SocialMediaButton.twitter(
+                                url: '',
+                                size: 35,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: AvatarGlow(
+                            glowColor: Colors.blue,
+                            child: Material(
+                              elevation: 8.0,
+                              shape: CircleBorder(),
+                              child: SocialMediaButton.instagram(
+                                url: '',
+                                size: 35,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: AvatarGlow(
+                            glowColor: Colors.green,
+                            child: Material(
+                              elevation: 8.0,
+                              shape: CircleBorder(),
+                              child: SocialMediaButton.whatsapp(
+                                url: '',
+                                size: 35,
+                                color: Colors.green,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
     );
   }
 
@@ -168,25 +147,29 @@ class _ContactUsState extends State<ContactUs> {
           children: <Widget>[
             if (_loading) LinearProgressIndicator(),
             SizedBox(height: 8),
-
-
             NameEditText(
-              value: profileModel != null && profileModel!.name != null ? profileModel!.name:'',
-              updateName: updateNameOnFormSave,
+              value: profileModel != null && profileModel!.name != null
+                  ? profileModel!.name
+                  : '',
+              updateName: (x) => inputName = x.toString(),
             ),
             SizedBox(height: 8),
             EmailEditText(
-              value: profileModel != null && profileModel!.email != null ? profileModel!.email:'',
-              updateEmail: updateEmailOnFormSave,
+              value: profileModel != null && profileModel!.email != null
+                  ? profileModel!.email
+                  : '',
+              updateEmail: (x) => inputEmail = x.toString(),
             ),
-           SizedBox(height: 8),
-           PhoneEditText(
-             value: profileModel != null && profileModel!.phone != null ? profileModel!.phone:'',
-             updatePhone: updatePhoneOnFormSave,
-           ),
+            SizedBox(height: 8),
+            PhoneEditText(
+              value: profileModel != null && profileModel!.phone != null
+                  ? profileModel!.phone
+                  : '',
+              updatePhone: (x) => inputPhone = x.toString(),
+            ),
             SizedBox(height: 8),
             MessageEditText(
-              updateMessage: updateMessageOnFormSave,
+              updateMessage: (x) => inputMessage = x.toString(),
             ),
             SizedBox(height: 20),
             submitButton(),
@@ -198,13 +181,11 @@ class _ContactUsState extends State<ContactUs> {
 
   Widget submitButton() {
     return InkWell(
-       onTap: _loading ? null : submitForm,
+      onTap: _loading ? null : submitForm,
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32),
-          color: kPrimaryColor
-        ),
+            borderRadius: BorderRadius.circular(32), color: kPrimaryColor),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -250,23 +231,26 @@ class _ContactUsState extends State<ContactUs> {
           .whenComplete(() {});
       final basicJsonResponse = JsonBasicResponse.fromJson(response.data);
       if (basicJsonResponse.status == YemString.successNoTranslate) {
-        Flushbar(
-          titleText: Text(
-            YemString.success,
-            style: kWhiteTextColor,
-          ),
-          message: YemString.success_send,
-          duration: Duration(seconds: 2),
-          flushbarPosition: FlushbarPosition.TOP,
-          backgroundColor: kPrimaryColor,
-        )..show(context);
+        // Flushbar(
+        //   titleText: Text(
+        //     YemString.success,
+        //     style: kWhiteTextColor,
+        //   ),
+        //   message: YemString.success_send,
+        //   duration: Duration(seconds: 2),
+        //   flushbarPosition: FlushbarPosition.,
+        //   backgroundColor: kPrimaryColor,
+        // )..show(context);
+
+
+        Alerts.showToast( YemString.success_send,Toast.LENGTH_LONG,ToastGravity.CENTER);
 
         setState(() {
           _loading = false;
-          inputName='';
-          inputEmail='';
-          inputPhone='';
-          inputMessage='';
+          inputName = '';
+          inputEmail = '';
+          inputPhone = '';
+          inputMessage = '';
         });
       } else {
         Flushbar(

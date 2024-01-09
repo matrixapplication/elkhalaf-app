@@ -80,8 +80,11 @@ class _LanguageScreenState extends State<LanguageScreen> {
               SizedBox(
                 height: 100,
               ),
-              FlatButton(
-                color: kPrimaryColor,
+              ElevatedButton(
+
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>( kPrimaryColor), // Set the background color
+                ),
                 onPressed: () {
                   setState(() {
                     if (selectArabic) {

@@ -42,24 +42,24 @@ class RegisterView extends StatelessWidget {
     );
   }
 
-  updateUserNameOnFormSave(String text) {
-    inputUserName = text;
-  }
+  // updateUserNameOnFormSave(String text) {
+  //   inputUserName = text;
+  // }
 
-  updateUserPhoneOnFormSave(String text) {
-    inputPhone = text;
-  }
+  // updateUserPhoneOnFormSave(String text) {
+  //   inputPhone = text;
+  // }
 
-  updateUserConfirmPasswordOnFormSave(String text) {
-    inputConfirmPassword = text;
-  }
+  // updateUserConfirmPasswordOnFormSave(String text) {
+  //   inputConfirmPassword = text;
+  // }
 
 //  updateEmailOnFormSave(String text) {
 //    inputEmail = text;
 //  }
-  updatePasswordOnFormSave(String text) {
-    inputPassword = text;
-  }
+  // updatePasswordOnFormSave(String text) {
+  //   inputPassword = text;
+  // }
 
   Widget registerLayout(double devicePixRatio, BuildContext context) {
     return SafeArea(
@@ -100,7 +100,7 @@ class RegisterView extends StatelessWidget {
             loading! ? LinearProgressIndicator() : Container(),
 
             EditTextName(
-              updateName: updateUserNameOnFormSave,
+              updateName: (x)=>inputUserName = x.toString(),
               focusNodeEmail: focusNodeEmail,
             ),
 //              EditTextEmail(
@@ -110,7 +110,7 @@ class RegisterView extends StatelessWidget {
 //              ),
             SizedBox(height: 10),
             EditTextPhone(
-              updatePhone: updateUserPhoneOnFormSave,
+              updatePhone: (x)=>inputPhone = x.toString(),
               focusNodePhone: focusNodePhone,
               focusNodePassword: focusNodePassword,
             ),
@@ -120,7 +120,7 @@ class RegisterView extends StatelessWidget {
 //            ),
             SizedBox(height: 8),
             EditTextPassword(
-              updatePassword: updatePasswordOnFormSave,
+              updatePassword: (x)=>inputPassword = x.toString(),
               focusNodePassword: focusNodePassword,
             ),
 

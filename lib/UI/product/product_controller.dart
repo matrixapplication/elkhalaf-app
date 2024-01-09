@@ -1,4 +1,7 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+
 import 'package:alkhalafsheep/UI/cart_provider/cart_provider_controller.dart';
+import 'package:alkhalafsheep/elements/alerts.dart';
 import 'package:alkhalafsheep/network_models/main_response.dart';
 import 'package:alkhalafsheep/provider/cart_provider.dart';
 import 'package:alkhalafsheep/utilities/constants.dart';
@@ -8,7 +11,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
 class ProductController extends StatefulWidget {
   static const String id = 'product';
@@ -282,7 +284,6 @@ class _ProductControllerState extends State<ProductController> {
                 GestureDetector(
                   onTap: () {
                     if (calculatePrice() > 0) {
-                      bool doseProductAlreadySaved = false;
                       CartProduct cartProduct = new CartProduct(
                           id: widget.product!.id,
                           categoryId: widget.product!.categoryId,
@@ -312,9 +313,11 @@ class _ProductControllerState extends State<ProductController> {
                       cartProvider.cart!.add(cartProduct);
 
                       cartProvider.notifyListeners();
-Toast.show('تم الأضافة بنجاح',gravity: Toast.top,duration: Toast.lengthLong);
+// Toast.show('تم الأضافة بنجاح',gravity: Toast.top,duration: Toast.lengthLong);
                       // Toast.show('تم الأضافة بنجاح', context,
                       //     duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
+             Alerts.showToast('تم الأضافة بنجاح');
+             Navigator.pushReplacementNamed(context, CartProviderController.id,arguments:true);
                       setState(() {});
                     }
                   },

@@ -18,7 +18,7 @@ import 'package:alkhalafsheep/utilities/constants.dart';
 import 'package:alkhalafsheep/utilities/echo.dart';
 import 'package:alkhalafsheep/utilities/mystrings.dart';
 import 'package:provider/provider.dart';
-// import 'package:social_media_buttons/social_media_button.dart';
+import 'package:social_media_buttons/social_media_button.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -34,8 +34,7 @@ class AccountView extends StatelessWidget {
         border: Border.all(color: Colors.grey, width: 0.4),
         borderRadius: BorderRadius.circular(4),
         color: Colors.white);
-    ProfileModel profileModel =
-        Provider.of<ProfileModel>(context, listen: false);
+    ProfileModel profileModel = Provider.of<ProfileModel>(context, listen: false);
     Echo('${profileModel.tokenId}');
     Echo('${profileModel.name}');
 
@@ -65,20 +64,20 @@ class AccountView extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-//                                Navigator.push(
-//                                  context,
-//                                  PageRouteBuilder(
-//                                    pageBuilder:
-//                                        (context, animation1, animation2) =>
-//                                            ProfileScreen(),
-//                                    transitionsBuilder: (context, animation1,
-//                                            animation2, child) =>
-//                                        FadeTransition(
-//                                            opacity: animation1, child: child),
-//                                    transitionDuration:
-//                                        Duration(milliseconds: 600),
-//                                  ),
-//                                );
+                              //  Navigator.push(
+                              //    context,
+                              //    PageRouteBuilder(
+                              //      pageBuilder:
+                              //          (context, animation1, animation2) =>
+                              //              ProfileScreen(),
+                              //      transitionsBuilder: (context, animation1,
+                              //              animation2, child) =>
+                              //          FadeTransition(
+                              //              opacity: animation1, child: child),
+                              //      transitionDuration:
+                              //          Duration(milliseconds: 600),
+                              //    ),
+                              //  );
 
                                 Navigator.of(context).push(SwipeablePageRoute(
                                   builder: (BuildContext context) =>
@@ -201,17 +200,17 @@ class AccountView extends StatelessWidget {
                   decoration: _decoration,
                   child: GestureDetector(
                     onTap: () {
-//                      Navigator.push(
-//                        context,
-//                        PageRouteBuilder(
-//                          pageBuilder: (context, animation1, animation2) =>
-//                              ContactUs(),
-//                          transitionsBuilder: (context, animation1, animation2,
-//                                  child) =>
-//                              FadeTransition(opacity: animation1, child: child),
-//                          transitionDuration: Duration(milliseconds: 600),
-//                        ),
-//                      );
+                    //  Navigator.push(
+                    //    context,
+                    //    PageRouteBuilder(
+                    //      pageBuilder: (context, animation1, animation2) =>
+                    //          ContactUs(),
+                    //      transitionsBuilder: (context, animation1, animation2,
+                    //              child) =>
+                    //          FadeTransition(opacity: animation1, child: child),
+                    //      transitionDuration: Duration(milliseconds: 600),
+                    //    ),
+                    //  );
 
                       Navigator.of(context).push(SwipeablePageRoute(
                         builder: (BuildContext context) => ContactUs(),
@@ -266,17 +265,11 @@ class AccountView extends StatelessWidget {
                           onTap: () async {
                             YemenyPrefs pref = YemenyPrefs();
                              pref.logout();
-                            await Provider.of<ProfileModel>(context,
-                                    listen: false)
-                                .clear;
-                            Provider.of<ProfileModel>(context, listen: false)
-                                .id = null;
-                            Provider.of<ProfileModel>(context, listen: false)
-                                .tokenId = null;
-                            Provider.of<ProfileModel>(context, listen: false)
-                                .name = null;
-                            Provider.of<ProfileModel>(context, listen: false)
-                                .phone = null;
+                            await Provider.of<ProfileModel>(context,listen: false).clear;
+                            Provider.of<ProfileModel>(context, listen: false).id = null;
+                            Provider.of<ProfileModel>(context, listen: false).tokenId = null;
+                            Provider.of<ProfileModel>(context, listen: false).name = null;
+                            Provider.of<ProfileModel>(context, listen: false).phone = null;
                             sleep(Duration(seconds: 1));
                             Navigator.pushNamed(context, SplashScreen.id);
                           },
@@ -315,12 +308,12 @@ class AccountView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      // SocialMediaButton.whatsapp(
-                      //   url: '',
-                      //   onTap: () {},
-                      //   size: 35,
-                      //   color: Colors.green,
-                      // ),
+                      SocialMediaButton.whatsapp(
+                        url: '',
+                        onTap: () {},
+                        size: 35,
+                        color: Colors.green,
+                      ),
                       GestureDetector(
                           onTap: () {
                             launch('');
@@ -362,8 +355,8 @@ void navigateToMyOrders(BuildContext context) async {
   else {
     AwesomeDialog(
       context: context,
-      animType: AnimType.TOPSLIDE,
-      dialogType: DialogType.INFO,
+      animType: AnimType.topSlide,
+      dialogType: DialogType.info,
       title: YemString.note,
       desc: YemString.register_to_navigate_to_myordes,
       btnOkText: YemString.register,
@@ -397,8 +390,8 @@ void navigateToMyAddresses(BuildContext context) async {
   else {
     AwesomeDialog(
       context: context,
-      animType: AnimType.TOPSLIDE,
-      dialogType: DialogType.INFO,
+      animType: AnimType.topSlide,
+      dialogType: DialogType.info,
       title: YemString.note,
       desc: YemString.register_to_navigate_to_myadresses,
       btnOkText: YemString.register,

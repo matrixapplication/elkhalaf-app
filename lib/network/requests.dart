@@ -20,11 +20,8 @@ import 'network_setup.dart';
 class NetworkRequests {
 
   Future<MainData?> main(BuildContext context) async {
-    MainDataProvider mainDataProvider = Provider.of<MainDataProvider>(
-        context, listen: false);
-    if (mainDataProvider.mainData != null &&
-        mainDataProvider.mainData!.products != null &&
-        mainDataProvider.mainData!.products!.length > 0) {
+    MainDataProvider mainDataProvider = Provider.of<MainDataProvider>(context, listen: false);
+    if (mainDataProvider.mainData != null && mainDataProvider.mainData!.products != null && mainDataProvider.mainData!.products!.length > 0) {
       return mainDataProvider.mainData;
     }
 
@@ -33,15 +30,13 @@ class NetworkRequests {
       Response response = await dio.get(kMainApi).whenComplete(() {});
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        JsonBasicResponse basicJsonResponse =
-        JsonBasicResponse.fromJson(response.data);
+        JsonBasicResponse basicJsonResponse = JsonBasicResponse.fromJson(response.data);
         if (basicJsonResponse.status == YemString.successNoTranslate) {
           MainResponse apiResponse = MainResponse.fromMap(response.data);
           mainDataProvider.mainData = apiResponse.data;
 
 
-          ProfileModel profileProvider =
-          Provider.of<ProfileModel>(context, listen: false);
+          ProfileModel profileProvider = Provider.of<ProfileModel>(context, listen: false);
           YemenyPrefs pref = YemenyPrefs();
           String? token = await pref.getToken();
           if (token != null && token != '') {

@@ -1,13 +1,12 @@
-
 import 'package:alkhalafsheep/UI/register/password_edit_text.dart';
 import 'package:alkhalafsheep/_helpers/shared_pref.dart';
 import 'package:alkhalafsheep/components/loading_widget.dart';
+import 'package:alkhalafsheep/elements/alerts.dart';
 import 'package:alkhalafsheep/models/profile_model.dart';
 import 'package:alkhalafsheep/network/apis.dart';
 import 'package:alkhalafsheep/network_models/profile_response.dart';
 import 'package:alkhalafsheep/network_models/response_status.dart';
 import 'package:alkhalafsheep/utilities/constants.dart';
-import 'package:alkhalafsheep/utilities/echo.dart';
 import 'package:alkhalafsheep/utilities/mystrings.dart';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:dio/dio.dart';
@@ -24,7 +23,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   var scaffoldKey;
   final formKey = GlobalKey<FormState>();
-
+  ProfileModel? profileModel;
   String? inputUserName = '';
   String? inputPhone = '';
   String? inputPassword = '';
@@ -54,6 +53,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    profileModel = Provider.of<ProfileModel>(context, listen: false);
+
     return Container(
       color: kPrimaryColor,
       child: SafeArea(
@@ -64,12 +65,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             backgroundColor: kPrimaryColor,
             centerTitle: true,
           ),
-          body:
-          FutureBuilder<ProfileModel?>(
+          body: FutureBuilder<ProfileModel?>(
             future: networkGetProfile(),
-            builder: (BuildContext context,
-                AsyncSnapshot<ProfileModel?> snapshot) {
-              if (snapshot.hasData) {
+            builder:
+                (BuildContext context, AsyncSnapshot<ProfileModel?> snapshot) {
+              print(snapshot.connectionState);
+              if (snapshot.connectionState == ConnectionState.done) {
                 return SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -85,15 +86,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               } else if (snapshot.hasError) {
                 //show error
-                return LoadingWidget(isItProgressIndicator: true,isItVerticalList: true,);
+                return LoadingWidget(
+                  isItProgressIndicator: true,
+                  isItVerticalList: true,
+                );
               } else {
                 //show Loading
-                return LoadingWidget(isItProgressIndicator: true,isItVerticalList: true,);
+                return LoadingWidget(
+                  isItProgressIndicator: true,
+                  isItVerticalList: true,
+                );
               }
             },
           ),
-
-
         ),
       ),
     );
@@ -101,8 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget registerFormLayout() {
     FocusNode focusNodeEmail = new FocusNode();
-    FocusNode focusNodePhone = new FocusNode();
-    FocusNode focusNodePassword = new FocusNode();
+
     return Form(
       key: formKey,
       child: Padding(
@@ -115,16 +119,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               elevation: 2.0,
               borderRadius: BorderRadius.all(Radius.circular(30)),
               child: TextFormField(
-                initialValue: inputUserName,
+                initialValue:  profileModel != null && profileModel!.name != null
+                  ? profileModel!.name
+                  : YemString.name,
                 decoration: InputDecoration(
-
                     border: InputBorder.none,
                     errorStyle: TextStyle(),
                     labelStyle: TextStyle(color: Colors.grey[500]),
-                    hintStyle:TextStyle(color: Colors.grey[500]),
-//                  labelText: YemString.name,
-                  hintText: YemString.name,
-                  counterStyle: TextStyle(color: Colors.green),
+                    hintStyle: TextStyle(color: Colors.grey[500]),
+                //  labelText: profileModel != null && profileModel!.name != null
+                //   ? profileModel!.name
+                //   : YemString.name,
+                    // hintText: YemString.name,
+                    counterStyle: TextStyle(color: Colors.green),
                     prefixIcon: Material(
                       elevation: 0,
                       borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -135,17 +142,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     enabled: false,
                     contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 13)
-                ),
+                        EdgeInsets.symmetric(horizontal: 25, vertical: 13)),
                 keyboardType: TextInputType.text,
-                validator: (text) {
-                  return text!.length < 2 ? YemString.invalid_name : null;
-                },
+                // validator: (text) =>
+                //     text!.length < 2 ? YemString.invalid_name : null,
                 textInputAction: TextInputAction.next,
-                onSaved: updateUserNameOnFormSave,
-                onFieldSubmitted: (String value) {
-                  FocusScope.of(context).requestFocus(focusNodeEmail);
-                },
+                onSaved: (x) => inputUserName = x.toString(),
+                onFieldSubmitted: (String value) =>
+                    FocusScope.of(context).requestFocus(focusNodeEmail),
               ),
             ),
             SizedBox(height: 12),
@@ -153,13 +157,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               elevation: 2.0,
               borderRadius: BorderRadius.all(Radius.circular(30)),
               child: TextFormField(
-                initialValue: inputPhone,
+                initialValue: profileModel != null && profileModel!.phone != null
+                  ? profileModel!.phone
+                  : YemString.phone,
                 decoration: InputDecoration(
-                  border: InputBorder.none,
-                  labelStyle: TextStyle(color: Colors.grey[500]),
-                  hintStyle:TextStyle(color: Colors.grey[500]),
-//                  labelText: YemString.phone,
-                  hintText: YemString.phone,
+                    border: InputBorder.none,
+                    labelStyle: TextStyle(color: Colors.grey[500]),
+                    hintStyle: TextStyle(color: Colors.grey[500]),
+                //  labelText: profileModel != null && profileModel!.phone != null
+                //   ? profileModel!.phone
+                //   : YemString.phone,
+                    // hintText: YemString.phone,
                     prefixIcon: Material(
                       elevation: 0,
                       borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -170,14 +178,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     enabled: false,
                     contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 13)
-                ),
+                        EdgeInsets.symmetric(horizontal: 25, vertical: 13)),
                 keyboardType: TextInputType.phone,
-                validator: (text) {
-                  bool isItShort = text!.length > 5;
-                  return isItShort ? null : YemString.invalid_phone;
-                },
-                onSaved: updateUserPhoneOnFormSave,
+                // validator: (text) {
+                //   bool isItShort = text!.length > 5;
+                //   return isItShort ? null : YemString.invalid_phone;
+                // },
+                onSaved: (x) => inputPhone = x.toString(),
               ),
             ),
             SizedBox(height: 12),
@@ -198,8 +205,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 13)
-                ),
+                        EdgeInsets.symmetric(horizontal: 25, vertical: 13)),
                 obscureText: obscurePassword,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
@@ -207,7 +213,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   bool passwordValid = text!.length > 7;
                   return passwordValid ? null : YemString.invalid_password;
                 },
-                onSaved: updateUserConfirmPasswordOnFormSave,
+                onSaved: (x) => inputOldPassword = x.toString(),
               ),
             ),
             SizedBox(height: 12),
@@ -218,7 +224,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 decoration: InputDecoration(
                     border: InputBorder.none,
 //                  labelText: YemString.password,
-                  hintText: 'كلمة السر الجديدة',
+                    hintText: 'كلمة السر الجديدة',
                     prefixIcon: Material(
                       elevation: 0,
                       borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -228,18 +234,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 13)
-                ),
+                        EdgeInsets.symmetric(horizontal: 25, vertical: 13)),
                 obscureText: obscurePassword,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
                 validator: (text) {
                   bool passwordValid = text!.length > 7;
                   return passwordValid ? null : YemString.invalid_password;
-                return null;
                 },
-                onSaved: updatePasswordOnFormSave,
-                onChanged: updatePasswordOnFormSave,
+                onSaved: (x) => inputPassword = x.toString(),
+                onChanged: (x) => inputPassword = x.toString(),
               ),
             ),
             SizedBox(height: 12),
@@ -248,20 +252,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               borderRadius: BorderRadius.all(Radius.circular(30)),
               child: TextFormField(
                 decoration: InputDecoration(
-                  border: InputBorder.none,
+                    border: InputBorder.none,
 //                  labelText: YemString.confirmation_password,
-                  hintText: YemString.confirmation_password,
-                  prefixIcon: Material(
-                    elevation: 0,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                    child: Icon(
-                      Icons.lock,
-                      color: kPrimaryColor,
+                    hintText: YemString.confirmation_password,
+                    prefixIcon: Material(
+                      elevation: 0,
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      child: Icon(
+                        Icons.lock,
+                        color: kPrimaryColor,
+                      ),
                     ),
-                  ),
                     contentPadding:
-                    EdgeInsets.symmetric(horizontal: 25, vertical: 13)
-                ),
+                        EdgeInsets.symmetric(horizontal: 25, vertical: 13)),
                 obscureText: obscurePassword,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
@@ -272,10 +275,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     return null;
                   }
                 },
-                onSaved: updateUserConfirmPasswordOnFormSave,
+                onSaved: (x) => inputConfirmPassword = x.toString(),
               ),
             ),
-
             SizedBox(height: 20),
             submitButton(),
           ],
@@ -285,9 +287,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget submitButton() {
-    return  GestureDetector(
-      onTap: (){
-
+    return GestureDetector(
+      onTap: () {
         if (formKey.currentState!.validate()) {
           formKey.currentState!.save();
           Flushbar(
@@ -299,10 +300,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           )..show(context);
 
           networkEditProfile(
-            name: inputUserName,
-            phone: inputPhone,
+            name: profileModel!.name,
+            phone: profileModel!.phone,
             password: inputPassword,
-            oldPassword:  inputOldPassword,
+            oldPassword: inputOldPassword,
           );
         }
       },
@@ -311,7 +312,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         margin: EdgeInsets.all(12),
         width: double.infinity,
         decoration: BoxDecoration(
-          color:kPrimarySwatchColor ,
+          color: kPrimarySwatchColor,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.grey, width: 0.8),
         ),
@@ -321,9 +322,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.edit,color: Colors.white,),
+                Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                ),
                 SizedBox(width: 12),
-                Text( YemString.update,
+                Text(
+                  YemString.update,
                   style: TextStyle(color: Colors.white),
                 ),
               ],
@@ -334,8 +339,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  void networkEditProfile({String? name, String? phone, String? password, String? oldPassword}) async {
-
+  void networkEditProfile(
+      {String? name,
+      String? phone,
+      String? password,
+      String? oldPassword}) async {
     YemenyPrefs prefs = YemenyPrefs();
     String? lang = await prefs.getLang();
     String? token = await prefs.getToken();
@@ -349,6 +357,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       Map<String, dynamic> queryParameters = Map();
       queryParameters['name'] = name;
+      queryParameters['phone'] = phone;
       queryParameters['old_password'] = oldPassword;
       queryParameters['password'] = password;
       queryParameters['password_confirmation'] = password;
@@ -373,15 +382,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           flushbarPosition: FlushbarPosition.BOTTOM,
           backgroundColor: Colors.green,
         )..show(context);
-
-      } else {
-      }
-    } on DioError catch (e) {
-
-    }
+      } else {}
+    } on DioError catch (e) {}
   }
-  Future<ProfileModel?> networkGetProfile() async {
 
+  Future<ProfileModel?> networkGetProfile() async {
     YemenyPrefs prefs = YemenyPrefs();
     String? lang = await prefs.getLang();
     String? token = await prefs.getToken();
@@ -393,16 +398,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       dio.options.headers['content-Type'] = 'application/json';
       dio.options.headers["authorization"] = "Bearer ${token}";
 
-
-      Response response = await dio
-          .get(kGetProfile)
-          .whenComplete(() {});
+      Response response = await dio.get(kGetProfile).whenComplete(() {});
 
       final basicJsonResponse = JsonBasicResponse.fromJson(response.data);
       if (basicJsonResponse.status == YemString.successNoTranslate) {
         final jsonResponse = JsonProfileResponse.fromJson(response.data);
-
-
 
         YemenyPrefs prefs = YemenyPrefs();
         await prefs.setUserName(jsonResponse.data!.name!);
@@ -412,9 +412,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         await prefs.setPhoto(jsonResponse.data!.avatar);
 
         Provider.of<ProfileModel>(context, listen: false).id =
-        '${jsonResponse.data!.id}';
+            '${jsonResponse.data!.id}';
         Provider.of<ProfileModel>(context, listen: false).email =
-        '${jsonResponse.data!.email}';
+            '${jsonResponse.data!.email}';
         Provider.of<ProfileModel>(context, listen: false).name =
             jsonResponse.data!.name;
         Provider.of<ProfileModel>(context, listen: false).phone =
@@ -425,18 +425,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         inputPhone = jsonResponse.data!.phone;
         inputUserName = jsonResponse.data!.name;
 
-
-
         ProfileModel profileModel = new ProfileModel();
         profileModel.name = inputUserName;
         profileModel.phone = inputPhone;
         return profileModel;
       } else {
-
+        Alerts.showToast("حدث خطأ ما يرجي المحاولة مره اخري");
       }
       return null;
     } on DioError catch (e) {
-
       return null;
     }
   }

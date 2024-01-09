@@ -17,14 +17,16 @@ class ServerErrorWidget extends StatelessWidget {
         children: <Widget>[
           Text(YemString.serverError),
           SizedBox(height: 8),
-          FlatButton(
+          ElevatedButton(
             onPressed: refresh as void Function()?,
             child: Text(
               YemString.retry,
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
-            color: PRIMARY_COLOR,
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(PRIMARY_COLOR), // Set the background color
+            ),
           )
         ],
       ),

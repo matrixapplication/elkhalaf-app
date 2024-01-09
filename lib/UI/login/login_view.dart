@@ -38,13 +38,13 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  updatePhoneOnFormSave(String text) {
-    inputPhone = text;
-  }
+  // updatePhoneOnFormSave(String text) {
+  //   inputPhone = text;
+  // }
 
-  updatePasswordOnFormSave(String text) {
-    inputPassword = text;
-  }
+  // updatePasswordOnFormSave(String text) {
+  //   inputPassword = text;
+  // }
 
   Widget loginLayout(double devicePixRatio) {
     return SafeArea(
@@ -82,15 +82,18 @@ class LoginView extends StatelessWidget {
           children: <Widget>[
             loading! ? LinearProgressIndicator() : Container(),
             EditTextPhone(
-              updatePhone: updatePhoneOnFormSave,
+              updatePhone: (x)=>inputPhone = x.toString(),
             ),
             SizedBox(
               height: 30,
             ),
             EditTextPassword(
-              updatePassword: updatePasswordOnFormSave,
+              updatePassword: (x)=>inputPassword = x.toString(),
             ),
+            SizedBox(height: 10),
+            
             textViewForgetPassword(),
+            SizedBox(height: 20),
             submitButton(),
             textViewSignUp(),
           ],
@@ -102,8 +105,10 @@ class LoginView extends StatelessWidget {
   Widget textViewForgetPassword() {
     return Container(
       alignment: Alignment.topRight,
-      child: FlatButton(
-        child: Text(YemString.forgetPassword, style: kGreyTextColor),
+      child: ElevatedButton(
+        child: Text(YemString.forgetPassword,style: TextStyle(color: Colors.white),),  style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(kPrimarySwatchColor), // Set the background color
+        ),
         onPressed: navigateForgetPassword,
       ),
     );

@@ -27,11 +27,11 @@ class AuthErrorWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
             ),
-            child: FlatButton(
+            child: ElevatedButton(
               onPressed: (){
                 Navigator.of(context).pushNamed(LoginController.id);
               },
-              color: kPrimaryColor,
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor)),
               child: Text(
                 YemString.login,style: TextStyle(color: Colors.white),
               ),

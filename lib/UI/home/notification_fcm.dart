@@ -95,11 +95,12 @@ class NotificationsFCM {
   void configLocalNotification() {
     Echo('FCM configLocalNotification');
     var initializationSettingsAndroid = new AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettingsIOS = new IOSInitializationSettings(
+    var initializationSettingsIOS = new DarwinInitializationSettings(
       defaultPresentSound: true,
       defaultPresentBadge: true,
       defaultPresentAlert: true,
     );
+
     var initializationSettings = new InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
@@ -109,14 +110,13 @@ class NotificationsFCM {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
       Platform.isAndroid ? 'com.matrixclouds.alkhalafsheep' : 'com.matrixclouds.alkhalafsheep',
       'com.matrixclouds.alkhalafsheep',
-      '682',
        playSound: true,
       enableVibration: true,
       importance: Importance.max,
       priority: Priority.high,
     );
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+
+    var platformChannelSpecifics = new NotificationDetails(android: androidPlatformChannelSpecifics, iOS: DarwinNotificationDetails());
 
     if (Platform.isIOS) {
       Echo('showNotification ${message.toString()}');

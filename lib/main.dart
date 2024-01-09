@@ -7,17 +7,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'UI/splash/splash_controller.dart';
 import 'route_generator.dart';
 import 'utilities/constants.dart';
 
-void main() => runApp(EasyLocalization(
-      child: MyApp(),
-      supportedLocales: [Locale('en'), Locale('ar')],
-      path: 'resources/langs',
-      useOnlyLangCode: true,
-    ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(EasyLocalization(
+    child: MyApp(),
+    supportedLocales: supportedLocales,
+    startLocale: supportedLocales[0],
+    fallbackLocale: supportedLocales[0],
+    path: 'resources/langs',
+    saveLocale: true,
+    useOnlyLangCode: true,
+  ));
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -32,8 +39,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // FirebaseApp.initializeApp(context); //status bar color
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: kPrimaryColor));
+    //  //status bar color
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: kPrimaryColor));
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CartProvider()),
@@ -47,11 +55,8 @@ class _MyAppState extends State<MyApp> {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: const <Locale>[
-          Locale('en', ''),
-          Locale('ar', ''),
-        ],
-        locale: Locale('ar'),
+        supportedLocales: supportedLocales,
+        locale: supportedLocales[0],
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primarySwatch: kPrimarySwatchColor2,
@@ -65,3 +70,8 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+final supportedLocales = <Locale>[
+  const Locale('ar'),
+  const Locale('en'),
+];

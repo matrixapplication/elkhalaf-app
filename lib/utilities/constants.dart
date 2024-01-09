@@ -18,7 +18,7 @@ const kPrimaryColor = Color(0xff22554E);
 const kPrimarySwatchColor = Color(0xffFFAA00);
 
 
-const kAccentColor = Colors.grey;
+const khighEmphasisOnAccent = Colors.grey;
 const kWhiteColor = Colors.white;
 const kBlackColorForText = Colors.black45;
 const kLightBlackColorForText = Colors.black26;
@@ -45,8 +45,7 @@ const kTextBlackHeader = TextStyle(color: Colors.black, fontSize: headerSize);
 const kTextBlackBody = TextStyle(color: Colors.black, fontSize: bodySize);
 const kTextBlackFooter = TextStyle(color: Colors.black, fontSize: footerSize);
 
-const kTextBlackBoldHeader = TextStyle(
-    fontWeight: FontWeight.bold, color: Colors.black, fontSize: headerSize);
+const kTextBlackBoldHeader = TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: headerSize);
 const kTextBlackBoldBody = TextStyle(
     fontWeight: FontWeight.bold, color: Colors.black, fontSize: bodySize);
 const kTextBlackBoldFooter = TextStyle(

@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:google_maps_place_picker/google_maps_place_picker.dart';
+import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 

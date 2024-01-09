@@ -88,7 +88,7 @@ class IntroScreenState extends State<IntroScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 /***************  NEXT ***********/
-                FlatButton(
+                ElevatedButton(
                   child: Text(lastPage ? "" : YemString.skip,
                       style: kTextBlackBoldHeader),
                   onPressed: () => lastPage ? null : widget.skipPage(context),
@@ -113,7 +113,7 @@ class IntroScreenState extends State<IntroScreen> {
                   ],
                 ),
                 /***************  Next or GOT IT ***********/
-                FlatButton(
+                ElevatedButton(
                   child: Text(lastPage ? YemString.gotIt : YemString.next,
                       style: kTextBlackBoldHeader),
                   onPressed: () => lastPage

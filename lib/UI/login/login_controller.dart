@@ -23,7 +23,7 @@ class LoginController extends StatefulWidget {
 
 class _LoginControllerState extends State<LoginController> {
   bool _loading = false;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   final _formKey = GlobalKey<FormState>();
 
   @override

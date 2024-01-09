@@ -11,6 +11,7 @@ import 'package:alkhalafsheep/utilities/mystrings.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:social_media_buttons/social_media_buttons.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -120,102 +121,99 @@ class _HomeDrawerState extends State<HomeDrawer> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              // if (mainDataProvider.mainData != null &&
-              //     mainDataProvider.mainData.snapchat != null &&
-              //     mainDataProvider.mainData.snapchat.isNotEmpty)
-                // Flexible(
-                //   flex: 1,
-                //   child: AvatarGlow(
-                //     glowColor: Colors.yellow,
-                //     // endRadius: 40.0,
-                //     child: Material(
-                //       elevation: 8.0,
-                //       shape: CircleBorder(),
-                //         child: SocialMediaButton.snapchat(
-                //         url: '${mainDataProvider.mainData.snapchat}',
-                //         size: 35,
-                //         color: Colors.yellow,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              // if (mainDataProvider.mainData != null &&
-              //     mainDataProvider.mainData.twitter != null &&
-              //     mainDataProvider.mainData.twitter.isNotEmpty)
-                // Flexible(
-                //   flex: 1,
-                //   child: AvatarGlow(
-                //     glowColor: Colors.blue,
-                //     endRadius: 40.0,
-                //     child: Material(
-                //       elevation: 8.0,
-                //       shape: CircleBorder(),
-                //       child: SocialMediaButton.twitter(
-                //         url: '${mainDataProvider.mainData.twitter}',
-                //         size: 35,
-                //         color: Colors.blue,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              // if (mainDataProvider.mainData != null &&
-              //     mainDataProvider.mainData.instagram != null &&
-              //     mainDataProvider.mainData.instagram.isNotEmpty)
-                // Flexible(
-                //   flex: 1,
-                //   child: AvatarGlow(
-                //     glowColor: Colors.orange,
-                //     endRadius: 40.0,
-                //     child: Material(
-                //       elevation: 8.0,
-                //       shape: CircleBorder(),
-                //       child: SocialMediaButton.instagram(
-                //         url: '${mainDataProvider.mainData.instagram}',
-                //         size: 35,
-                //         color: Colors.orange,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              // Flexible(
-              //   flex: 1,
-              //   child: AvatarGlow(
-              //     glowColor: Colors.black,
-              //     endRadius: 40.0,
-              //     child: GestureDetector(
-              //       onTap: (){
-              //         launch('${mainDataProvider.mainData.tiktok}');
-              //       },
-              //       child: Material(
-              //         elevation: 8.0,
-              //         shape: CircleBorder(),
-              //         child: Image.asset(
-              //           'assets/img/ic_tiktok.png',
-              //           width: 45,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              // if (mainDataProvider.mainData != null &&
-              //     mainDataProvider.mainData.whatsapp != null &&
-              //     mainDataProvider.mainData.whatsapp.isNotEmpty)
-                // Flexible(
-                //   flex: 1,
-                //   child: AvatarGlow(
-                //     glowColor: Colors.green,
-                //     endRadius: 40.0,
-                //     child: Material(
-                //       elevation: 8.0,
-                //       shape: CircleBorder(),
-                //       child: SocialMediaButton.whatsapp(
-                //         url: '${mainDataProvider.mainData.whatsapp}',
-                //         size: 35,
-                //         color: Colors.green,
-                //       ),
-                //     ),
-                //   ),
-                // ),
+              if (mainDataProvider.mainData != null &&
+                  mainDataProvider.mainData!.snapchat != null &&
+                  mainDataProvider.mainData!.snapchat!.isNotEmpty)
+                Flexible(
+                  flex: 1,
+                  child: AvatarGlow(
+                    glowColor: Colors.yellow,
+                    // endRadius: 40.0,
+                    child: Material(
+                      elevation: 8.0,
+                      shape: CircleBorder(),
+                        child: SocialMediaButton.snapchat(
+                        url: '${mainDataProvider.mainData!.snapchat}',
+                        size: 35,
+                        color: Colors.yellow,
+                      ),
+                    ),
+                  ),
+                ),
+              if (mainDataProvider.mainData != null &&
+                  mainDataProvider.mainData!.twitter != null &&
+                  mainDataProvider.mainData!.twitter!.isNotEmpty)
+                Flexible(
+                  flex: 1,
+                  child: AvatarGlow(
+                    glowColor: Colors.blue,
+                    child: Material(
+                      elevation: 8.0,
+                      shape: CircleBorder(),
+                      child: SocialMediaButton.twitter(
+                        url: '${mainDataProvider.mainData!.twitter}',
+                        size: 35,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+              if (mainDataProvider.mainData != null &&
+                  mainDataProvider.mainData!.instagram != null &&
+                  mainDataProvider.mainData!.instagram!.isNotEmpty)
+                Flexible(
+                  flex: 1,
+                  child: AvatarGlow(
+                    glowColor: Colors.orange,
+                    child: Material(
+                      elevation: 8.0,
+                      shape: CircleBorder(),
+                      child: SocialMediaButton.instagram(
+                        url: '${mainDataProvider.mainData!.instagram}',
+                        size: 35,
+                        color: Colors.orange,
+                      ),
+                    ),
+                  ),
+                ),
+              Flexible(
+                flex: 1,
+                child: AvatarGlow(
+                  glowColor: Colors.black,
+                  
+                  child: GestureDetector(
+                    onTap: (){
+                      launch('${mainDataProvider.mainData!.tiktok}');
+                    },
+                    child: Material(
+                      elevation: 8.0,
+                      shape: CircleBorder(),
+                      child: Image.asset(
+                        'assets/img/ic_tiktok.png',
+                        width: 45,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              if (mainDataProvider.mainData != null &&
+                  mainDataProvider.mainData!.whatsapp != null &&
+                  mainDataProvider.mainData!.whatsapp!.isNotEmpty)
+                Flexible(
+                  flex: 1,
+                  child: AvatarGlow(
+                    glowColor: Colors.green,
+                    child: Material(
+                      elevation: 8.0,
+                      shape: CircleBorder(),
+                      child: SocialMediaButton.whatsapp(
+                        url: '${mainDataProvider.mainData!.whatsapp}',
+                        size: 35,
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                ),
             ],
           )
         ],

@@ -3,7 +3,7 @@ import 'package:alkhalafsheep/utilities/constants.dart';
 import 'package:alkhalafsheep/utilities/mystrings.dart';
 
 class MessageEditText extends StatelessWidget {
-  final Function? updateMessage;
+  final void Function(String? x)? updateMessage;
 
   MessageEditText({this.updateMessage});
 
@@ -39,7 +39,7 @@ class MessageEditText extends StatelessWidget {
           bool MessageValid = text!.length > 1;
           return MessageValid ? null : MessageOnError;
         },
-        onSaved: updateMessage as void Function(String?)?,
+        onSaved: updateMessage,
       ),
     );
   }

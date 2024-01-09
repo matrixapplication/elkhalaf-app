@@ -39,8 +39,8 @@ class EmailEditText extends StatelessWidget {
           bool emailValid = RegExp(
                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
               .hasMatch(text!);
-//        return emailValid ? null : emailOnError;
-          return null;
+       return emailValid ? null : emailOnError;
+          // return null;
         },
         onSaved: updateEmail as void Function(String?)?,
       ),

@@ -5,7 +5,7 @@ bool obscurePassword = true;
 
 class EditTextPassword extends StatefulWidget {
   final Function? updatePassword;
-  final bool autoValidate;
+  final AutovalidateMode? autoValidate;
   final Function? validateFunc;
   final String hint;
   final String? value;
@@ -13,7 +13,7 @@ class EditTextPassword extends StatefulWidget {
   EditTextPassword(
       {required this.hint,
       this.updatePassword,
-      this.autoValidate = false,
+      this.autoValidate ,
       this.value,
       this.validateFunc});
 
@@ -37,7 +37,7 @@ class _EditTextPasswordState extends State<EditTextPassword> {
         border: Border.all(color: PRIMARY_COLOR, width: 0.4),
       ),
       child: TextFormField(
-        autovalidate: widget.autoValidate,
+        autovalidateMode: widget.autoValidate ?? AutovalidateMode.disabled,
         initialValue: widget.value,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(

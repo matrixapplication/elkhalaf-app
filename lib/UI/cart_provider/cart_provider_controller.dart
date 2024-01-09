@@ -480,8 +480,8 @@ class _CartProviderControllerState extends State<CartProviderController> {
             } else {
               AwesomeDialog(
                 context: context,
-                animType: AnimType.SCALE,
-                dialogType: DialogType.INFO,
+                animType: AnimType.scale,
+                dialogType: DialogType.info,
                 title: YemString.note,
                 desc: YemString.required_login,
                 btnOkText: YemString.register,
@@ -543,8 +543,8 @@ class _CartProviderControllerState extends State<CartProviderController> {
     } else {
       AwesomeDialog(
         context: context,
-        animType: AnimType.SCALE,
-        dialogType: DialogType.INFO,
+        animType: AnimType.scale,
+        dialogType: DialogType.info,
         title: YemString.note,
         desc: YemString.required_login,
         btnOkText: YemString.register,

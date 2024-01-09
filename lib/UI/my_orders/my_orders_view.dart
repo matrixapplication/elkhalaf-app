@@ -2,11 +2,9 @@ import 'package:alkhalafsheep/network_models/my_orders_response.dart';
 import 'package:flutter/material.dart';
 import 'package:alkhalafsheep/UI/order_details/order_controller.dart';
 import 'package:alkhalafsheep/utilities/constants.dart';
-import 'package:alkhalafsheep/utilities/echo.dart';
 import 'package:alkhalafsheep/utilities/mystrings.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 
-import 'my_order_model.dart';
 
 class MyOrdersView extends StatefulWidget {
   final List<SingleOrder>? myOrdersList;
