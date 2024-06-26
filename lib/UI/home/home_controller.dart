@@ -68,7 +68,6 @@ class _HomeControllerState extends State<HomeController> {
       ],
     );
   }
-
   Future<bool> onBackPress() {
     if (currentIndex == 2) {
       return Future.value(true);
@@ -167,48 +166,59 @@ class _HomeControllerState extends State<HomeController> {
         },
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.local_offer), label: YemString.offers),
+              icon: Icon(Icons.local_offer,size: 22,), label: YemString.offers),
           BottomNavigationBarItem(
-            icon: Center(
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Icon(
-                      Icons.shopping_cart,
+            icon:
+            Center(
+              child: FittedBox(
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: Icon(
+                        Icons.shopping_cart,
+                        size: 22.0,
+
+                      ),
                     ),
-                  ),
-                  cartProvider.cart == null ||
-                      cartProvider.cart!.length < 1
-                      ? Text(
-                    '',
-                    style: TextStyle(
-                        fontSize: 10.0, color: kPrimaryColor),
-                  )
-                      : CircleAvatar(
-                    radius: 8.6,
-                    backgroundColor: Colors.blueGrey,
-                    child: Text(
-                      '${cartProvider.cart!.length}',
+                    cartProvider.cart == null ||
+                        cartProvider.cart!.length < 1
+                        ? Text(
+                      '',
                       style: TextStyle(
-                          fontSize: 8.0, color: Colors.white),
+                          fontSize: 10.0, color: kPrimaryColor),
+                    )
+                        : CircleAvatar(
+                      radius: 8.6,
+                      backgroundColor: Colors.blueGrey,
+                      child: Text(
+                        '${cartProvider.cart!.length}',
+                        style: TextStyle(
+                            fontSize: 8.0, color: Colors.white),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             label: 'السلة',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.arrow_drop_down), label: YemString.home),
+              icon: Icon(Icons.arrow_drop_down,
+                size: 20.0,
+
+              ), label: YemString.home),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_circle,
-                size: 24.0,
+                size: 22.0,
               ),
               label: YemString.account),
           BottomNavigationBarItem(
-              icon: Icon(Icons.reorder), label: YemString.my_orders),
+              icon: Icon(Icons.reorder,
+                size: 22.0,
+
+              ), label: YemString.my_orders),
         ],
       ),
     );

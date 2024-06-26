@@ -1,1 +1,0 @@
- C:\\Users\\abdo3\\Downloads\\khalaf-master\\.dart_tool\\flutter_build\\a1735cdf6a6a4a0055b5a62bc9f3f317\\native_assets.yaml: 

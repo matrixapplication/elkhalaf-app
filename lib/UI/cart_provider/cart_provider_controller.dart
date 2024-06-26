@@ -474,7 +474,6 @@ class _CartProviderControllerState extends State<CartProviderController> {
             YemenyPrefs prefs = YemenyPrefs();
             String? token = await prefs.getToken();
             bool userRegistered = token == null || token.isEmpty ? false : true;
-
             if (userRegistered) {
               Navigator.of(context).pushNamed(ShippingAddress.id);
             } else {
@@ -577,7 +576,7 @@ class NoItemCart extends StatelessWidget {
                 Container(
                   child: Center(
                     child: Image.asset(
-                      'assets/img/ic_empty.png',
+                      'assets/img/empty.png',
                       height: 150,
                       width: 150,
                     ),

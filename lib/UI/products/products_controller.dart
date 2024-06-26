@@ -68,10 +68,10 @@ class ProductsController extends StatelessWidget {
                 ),
               ],
             ),
-            floatingActionButton: floatingWidget(context),
-            floatingActionButtonLocation:
-            FloatingActionButtonLocation.centerDocked,
-            bottomNavigationBar: buildBottomNavigationBar(context),
+            // floatingActionButton: floatingWidget(context),
+            // floatingActionButtonLocation:
+            // FloatingActionButtonLocation.centerDocked,
+            // bottomNavigationBar: buildBottomNavigationBar(context),oldOrders
             body: products == null || products!.length < 1
                 ? EmptyErrorWidget()
                 : GridView.count(
@@ -92,45 +92,45 @@ class ProductsController extends StatelessWidget {
       ),
     );
   }
-  BottomAppBar buildBottomNavigationBar(BuildContext context) {
-    return BottomAppBar(
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      shape: CircularNotchedRectangle(),
-      child: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: 2,
-        fixedColor: Colors.white70,
-        backgroundColor: kPrimaryColor,
-        unselectedItemColor: Colors.white70,
-        onTap: (value) {
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => HomeController(pageNumber: value),
-              ),
-                  (route) => false);
-        },
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.local_offer), label: YemString.offers),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'راسلنا',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.arrow_drop_down), label: YemString.home),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle,
-                size: 24.0,
-              ),
-              label: YemString.account),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.reorder), label: YemString.my_orders),
-        ],
-      ),
-    );
-  }
+  // BottomAppBar buildBottomNavigationBar(BuildContext context) {
+  //   return BottomAppBar(
+  //     clipBehavior: Clip.antiAliasWithSaveLayer,
+  //     shape: CircularNotchedRectangle(),
+  //     child: BottomNavigationBar(
+  //       type: BottomNavigationBarType.fixed,
+  //       currentIndex: 2,
+  //       fixedColor: Colors.white70,
+  //       backgroundColor: kPrimaryColor,
+  //       unselectedItemColor: Colors.white70,
+  //       onTap: (value) {
+  //         Navigator.pushAndRemoveUntil(
+  //             context,
+  //             MaterialPageRoute(
+  //               builder: (BuildContext context) => HomeController(pageNumber: value),
+  //             ),
+  //                 (route) => false);
+  //       },
+  //       items: [
+  //         BottomNavigationBarItem(
+  //             icon: Icon(Icons.local_offer), label: YemString.offers),
+  //         BottomNavigationBarItem(
+  //           icon: Icon(Icons.chat),
+  //           label: 'راسلنا',
+  //         ),
+  //         BottomNavigationBarItem(
+  //             icon: Icon(Icons.arrow_drop_down), label: YemString.home),
+  //         BottomNavigationBarItem(
+  //             icon: Icon(
+  //               Icons.account_circle,
+  //               size: 24.0,
+  //             ),
+  //             label: YemString.account),
+  //         BottomNavigationBarItem(
+  //             icon: Icon(Icons.reorder), label: YemString.my_orders),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget floatingWidget(BuildContext context) {
     return FloatingActionButton(

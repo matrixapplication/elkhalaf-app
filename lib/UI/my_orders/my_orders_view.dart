@@ -65,7 +65,7 @@ class _MyOrdersViewState extends State<MyOrdersView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('${YemString.the_order}  ${data.orderCode}'),
+                  Text('${YemString.the_order.toString()}  ${data.orderCode.toString()}'),
                   InkWell(
                       onTap: () {
                         Navigator.of(context!).push(SwipeablePageRoute(

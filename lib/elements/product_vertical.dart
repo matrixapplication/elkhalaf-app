@@ -44,6 +44,13 @@ class SingleProductVertical extends StatelessWidget {
                       ? product!.images![0]
                       : '',
                   fit: BoxFit.cover,
+                  errorWidget: (a,s,d){
+                    return Image.asset(
+                      'assets/img/holder.png',
+                      fit: BoxFit.fill,
+                      height: 140,
+                    );
+                  },
                   placeholder: (ctx, url) {
                     return Image.asset(
                       'assets/img/logo_white_bk.png',

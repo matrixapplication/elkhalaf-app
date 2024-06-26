@@ -1,5 +1,6 @@
 const BASEURL = 'https://alkhalfsheep.com/api';
-const BASE_URL_IMAGE_PATH = 'https://herfysheep.com';
+// const BASE_URL_IMAGE_PATH = 'https://herfysheep.com';
+const BASE_URL_IMAGE_PATH = 'https://alkhalfsheep.com';
 
 const kLoginApi = '$BASEURL/login';
 const kRegisterApi = '$BASEURL/register';

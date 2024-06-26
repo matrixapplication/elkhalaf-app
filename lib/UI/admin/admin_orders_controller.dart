@@ -170,7 +170,7 @@ class _AdminOrdersControllerState extends State<AdminOrdersController> {
                         Container(
                           child: Center(
                             child: Image.asset(
-                              'assets/img/ic_empty.png',
+                              'assets/img/empty.png',
                               height: 150,
                               width: 150,
                             ),

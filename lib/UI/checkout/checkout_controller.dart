@@ -285,6 +285,17 @@ class _CheckoutControllerState extends State<CheckoutController> {
                                   fit: BoxFit.cover,
                                   width: 45,
                                   height: 45,
+                                  errorWidget: (e,r,t){
+                                    return ClipRRect(
+                                      borderRadius: BorderRadius.circular(12),
+                                      child: Image.asset(
+                                        'assets/img/holder.png',
+                                        fit: BoxFit.cover,
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                    );
+                                  },
                                   placeholder: (ctx, url) {
                                     return Image.asset(
                                       'assets/img/logo_white_bk.png',

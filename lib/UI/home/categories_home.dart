@@ -26,7 +26,7 @@ class _CategoriesHomeState extends State<CategoriesHome> {
           //category title
           Stack(
             children: [
-              Image.asset('assets/img/title_bk.png'),
+              // Image.asset('assets/img/title_bk.png'),
               Positioned(
                 top: 0,
                 bottom: 0,

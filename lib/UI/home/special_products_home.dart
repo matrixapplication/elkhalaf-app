@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 
+import '../products/products_controller.dart';
+
 class SpecialProductsOffer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,29 +20,38 @@ class SpecialProductsOffer extends StatelessWidget {
         children: <Widget>[
           SizedBox(height: 12),
           //Title
-          Stack(
-            children: [
-              Image.asset('assets/img/title_bk.png'),
-              Positioned(
-                top: 0,
-                bottom: 0,
-                left: 20,
-                right: 20,
-                child: Center(
+          // Stack(
+          //   children: [
+          //     Image.asset('assets/img/title_bk.png'),
+          //     Positioned(
+          //       top: 0,
+          //       bottom: 0,
+          //       left: 20,
+          //       right: 20,
+          //       child: Center(
+          //         child: Text(
+          //           YemString.specialOffers,
+          //           style: TextStyle(color: Colors.white, fontSize: 14),
+          //         ),
+          //       ),
+          //     )
+          //   ],
+          // ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    YemString.specialOffers,
-                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  'الاقسام',
+                    style: TextStyle(color: Colors.black, fontSize: 18,fontWeight: FontWeight.w700),
                   ),
                 ),
-              )
-            ],
-          ),
           Column(
             children: [
-              ...data.mainData!.products!.map((product) {
+              ...data.mainData!.categories!.map((category) {
                 return GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed(ProductController.id, arguments: product);
+                    Navigator.of(context).pushNamed(ProductsController.id, arguments: data.mainData!.products!.where((element) => element.categoryId == category.id).toList());
+
+                    // Navigator.of(context).pushNamed(ProductController.id, arguments: category);
                   },
                   child: Container(
                     margin: EdgeInsets.only(top: 8, left: 8, right: 8),
@@ -52,13 +63,24 @@ class SpecialProductsOffer extends StatelessWidget {
                           child: CachedNetworkImage(
                             width: double.infinity,
                             height: MediaQuery.of(context).size.width * 0.35,
-                            imageUrl: product.images != null && product.images!.length > 0 ? product.images![0] : '',
+                            imageUrl: category.image != null && category.image!.length > 0 ? category.image! : '',
                             fit: BoxFit.fill,
+                            errorWidget: (a,s,d){
+                              return Center(
+                                child: Image.asset(
+                                  'assets/img/holder.png',
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                ),
+                              );
+                            },
                             placeholder: (ctx, url) {
                               return Center(
                                 child: Image.asset(
                                   'assets/img/logo_white_bk.png',
                                   fit: BoxFit.cover,
+                                  width: double.infinity,
+
                                 ),
                               );
                             },
@@ -72,7 +94,7 @@ class SpecialProductsOffer extends StatelessWidget {
                             padding: const EdgeInsets.all(4.0),
                             child: Center(
                               child: Text(
-                                product.title!,
+                                category.title!,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,

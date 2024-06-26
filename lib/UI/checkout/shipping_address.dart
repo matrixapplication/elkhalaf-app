@@ -22,6 +22,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 import '../../utilities/constants.dart';
+import '../google_map/address_location_model.dart';
+import '../google_map/custom_google_map.dart';
 
 class ShippingAddress extends StatefulWidget {
   static const String id = 'shipping_address';
@@ -43,7 +45,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
   final _homeNoController = TextEditingController();
   String? cityName;
   String? cityId;
-  PickResult? selectedPlace;
+  AddressLocationModel? selectedPlace;
   var _scaffold = new GlobalKey<ScaffoldState>();
 
  
@@ -300,10 +302,8 @@ class _ShippingAddressState extends State<ShippingAddress> {
                                             LocationPermission per = await Geolocator.checkPermission();
 
                                             if (per ==
-                                                LocationPermission
-                                                    .deniedForever) return;
-                                            if (per ==
-                                                LocationPermission.denied) {
+                                                LocationPermission.deniedForever) return;
+                                            if (per == LocationPermission.denied) {
                                               LocationPermission per2 =
                                                   await Geolocator
                                                       .requestPermission();
@@ -318,123 +318,135 @@ class _ShippingAddressState extends State<ShippingAddress> {
 
                                             Position position = await Geolocator
                                                 .getCurrentPosition();
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) {
-                                                  return PlacePicker(
-                                                    apiKey:
-                                                        'AIzaSyCBCiEuSLzUEH9sAPCY50fR02diH_hXGTs',
-                                                    initialPosition: LatLng(
-                                                        position.latitude,
-                                                        position.longitude),
-                                                    useCurrentLocation: true,
-                                                    selectInitialPosition:
-                                                        false,
-                                                    usePlaceDetailSearch: false,
-                                                    pinBuilder:
-                                                        (context, state) {
-                                                      if (state ==
-                                                          PinState.Idle) {
-                                                        return Icon(
-                                                            Icons.location_on,
-                                                            color:
-                                                                kPrimaryColor,
-                                                            size: 40);
-                                                      } else {
-                                                        return Icon(
-                                                            Icons.location_on,
-                                                            color:
-                                                                kPrimaryColor2,
-                                                            size: 40);
-                                                      }
-                                                    },
-
-                                                    selectedPlaceWidgetBuilder:
-                                                        (_, selectedPlace, state, isSearchBarFocused) {
-                                                      return FloatingCard(
-                                                        bottomPosition: 0.0,
-                                                        // MediaQuery.of(context) will cause rebuild. See MediaQuery document for the information.
-                                                        leftPosition: 0.0,
-                                                        rightPosition: 0.0,
-                                                        width: 200,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(12.0),
-                                                        child: Container(
-                                                          margin: EdgeInsets.all(8),
-                                                        decoration: BoxDecoration(
-                                                        color: selectedLatitude == 0
-                                                          ? kPrimarySwatchColor
-                                                              : Colors.green,
-                                                          borderRadius: BorderRadius.circular(12),
-                                                          border: Border.all(
-                                                          color: Colors.grey, width: 0.8),
-                                                        ),
-                                                          child: GestureDetector(
-                                                              onTap: () {
-                                                                if(selectedPlace != null) {
-                                                                  selectedLatitude = selectedPlace.geometry!.location.lat;
-                                                                  selectedLongitude =selectedPlace.geometry!.location.lng;
-
-                                                                  selectedAddress = selectedPlace.formattedAddress;
-                                                                  Navigator.of(
-                                                                      context)
-                                                                      .pop();
-
-                                                                  setState(() {});
-                                                                }
-                                                              },
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.all(8.0),
-                                                                child: Center(child: Text("تحديد",style: TextStyle(color: Colors.white),)),
-                                                              )),
-
-                                                        ),
-                                                      );
-                                                    },
-                                                    //forceSearchOnZoomChanged: true,
-                                                    //automaticallyImplyAppBarLeading: false,
-                                                    //autocompleteLanguage: "ko",
-                                                    //region: 'au',
-                                                    //selectInitialPosition: true,
-                                                    // selectedPlaceWidgetBuilder: (_, selectedPlace, state, isSearchBarFocused) {
-                                                    //   print("state: $state, isSearchBarFocused: $isSearchBarFocused");
-                                                    //   return isSearchBarFocused
-                                                    //       ? Container()
-                                                    //       : FloatingCard(
-                                                    //           bottomPosition: 0.0, // MediaQuery.of(context) will cause rebuild. See MediaQuery document for the information.
-                                                    //           leftPosition: 0.0,
-                                                    //           rightPosition: 0.0,
-                                                    //           width: 500,
-                                                    //           borderRadius: BorderRadius.circular(12.0),
-                                                    //           child: state == SearchingState.Searching
-                                                    //               ? Center(child: CircularProgressIndicator())
-                                                    //               : RaisedButton(
-                                                    //                   child: Text("Pick Here"),
-                                                    //                   onPressed: () {
-                                                    //                     // IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
-                                                    //                     //            this will override default 'Select here' Button.
-                                                    //                     print("do something with [selectedPlace] data");
-                                                    //                     Navigator.of(context).pop();
-                                                    //                   },
-                                                    //                 ),
-                                                    //         );
-                                                    // },
-
-                                                    // },
-                                                  );
-                                                },
-                                              ),
-                                            );
+                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                            CustomGoogleMapScreen(lat: position.latitude, long: position.longitude,
+                                              onTap: (AddressLocationModel addressModel) {
+                                              setState(() {
+                                                selectedLatitude =double.parse('${addressModel.lat.toString()}');
+                                                selectedLongitude =double.parse('${addressModel.long.toString()}');
+                                                selectedPlace =addressModel;
+                                                Navigator.pop(context);
+                                              });
+                                                return Future.value(true);
+                                              },
+                                            )
+                                            ));
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //     builder: (context) {
+                                            //       return PlacePicker(
+                                            //         apiKey:
+                                            //             'AIzaSyCBCiEuSLzUEH9sAPCY50fR02diH_hXGTs',
+                                            //         initialPosition: LatLng(
+                                            //             position.latitude,
+                                            //             position.longitude),
+                                            //         useCurrentLocation: true,
+                                            //         selectInitialPosition:
+                                            //             false,
+                                            //         usePlaceDetailSearch: false,
+                                            //         pinBuilder:
+                                            //             (context, state) {
+                                            //           if (state ==
+                                            //               PinState.Idle) {
+                                            //             return Icon(
+                                            //                 Icons.location_on,
+                                            //                 color:
+                                            //                     kPrimaryColor,
+                                            //                 size: 40);
+                                            //           } else {
+                                            //             return Icon(
+                                            //                 Icons.location_on,
+                                            //                 color:
+                                            //                     kPrimaryColor2,
+                                            //                 size: 40);
+                                            //           }
+                                            //         },
+                                            //
+                                            //         selectedPlaceWidgetBuilder:
+                                            //             (_, selectedPlace, state, isSearchBarFocused) {
+                                            //           return FloatingCard(
+                                            //             bottomPosition: 0.0,
+                                            //             // MediaQuery.of(context) will cause rebuild. See MediaQuery document for the information.
+                                            //             leftPosition: 0.0,
+                                            //             rightPosition: 0.0,
+                                            //             width: 200,
+                                            //             borderRadius:
+                                            //                 BorderRadius
+                                            //                     .circular(12.0),
+                                            //             child: Container(
+                                            //               margin: EdgeInsets.all(8),
+                                            //             decoration: BoxDecoration(
+                                            //             color: selectedLatitude == 0
+                                            //               ? kPrimarySwatchColor
+                                            //                   : Colors.green,
+                                            //               borderRadius: BorderRadius.circular(12),
+                                            //               border: Border.all(
+                                            //               color: Colors.grey, width: 0.8),
+                                            //             ),
+                                            //               child: GestureDetector(
+                                            //                   onTap: () {
+                                            //                     if(selectedPlace != null) {
+                                            //                       selectedLatitude = selectedPlace.geometry!.location.lat;
+                                            //                       selectedLongitude =selectedPlace.geometry!.location.lng;
+                                            //
+                                            //                       selectedAddress = selectedPlace.formattedAddress;
+                                            //                       Navigator.of(
+                                            //                           context)
+                                            //                           .pop();
+                                            //
+                                            //                       setState(() {});
+                                            //                     }
+                                            //                   },
+                                            //                   child: Padding(
+                                            //                     padding: const EdgeInsets.all(8.0),
+                                            //                     child: Center(child: Text("تحديد",style: TextStyle(color: Colors.white),)),
+                                            //                   )),
+                                            //
+                                            //             ),
+                                            //           );
+                                            //         },
+                                            //         //forceSearchOnZoomChanged: true,
+                                            //         //automaticallyImplyAppBarLeading: false,
+                                            //         //autocompleteLanguage: "ko",
+                                            //         //region: 'au',
+                                            //         //selectInitialPosition: true,
+                                            //         // selectedPlaceWidgetBuilder: (_, selectedPlace, state, isSearchBarFocused) {
+                                            //         //   print("state: $state, isSearchBarFocused: $isSearchBarFocused");
+                                            //         //   return isSearchBarFocused
+                                            //         //       ? Container()
+                                            //         //       : FloatingCard(
+                                            //         //           bottomPosition: 0.0, // MediaQuery.of(context) will cause rebuild. See MediaQuery document for the information.
+                                            //         //           leftPosition: 0.0,
+                                            //         //           rightPosition: 0.0,
+                                            //         //           width: 500,
+                                            //         //           borderRadius: BorderRadius.circular(12.0),
+                                            //         //           child: state == SearchingState.Searching
+                                            //         //               ? Center(child: CircularProgressIndicator())
+                                            //         //               : RaisedButton(
+                                            //         //                   child: Text("Pick Here"),
+                                            //         //                   onPressed: () {
+                                            //         //                     // IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
+                                            //         //                     //            this will override default 'Select here' Button.
+                                            //         //                     print("do something with [selectedPlace] data");
+                                            //         //                     Navigator.of(context).pop();
+                                            //         //                   },
+                                            //         //                 ),
+                                            //         //         );
+                                            //         // },
+                                            //
+                                            //         // },
+                                            //       );
+                                            //     },
+                                            //   ),
+                                            // );
                                           },
                                         ),
                                       ),
                                     ),
                                     selectedPlace == null
                                         ? Container()
-                                        : Text(selectedPlace!.formattedAddress ??
-                                            ""),
+                                        : Text('${selectedPlace!.city ?? ""}${selectedPlace!.street ?? ""}'),
                                   ],
                                 ),
                               ),

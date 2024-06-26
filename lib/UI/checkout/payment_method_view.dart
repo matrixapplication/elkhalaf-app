@@ -91,6 +91,17 @@ class _PaymentMethodViewState extends State<PaymentMethodView> {
                             imageUrl: e.logo != null
                                 ? BASE_URL_IMAGE_PATH + e.logo!
                                 : '',
+                            errorWidget: (e,r,t){
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.asset(
+                                  'assets/img/holder.png',
+                                  fit: BoxFit.cover,
+                                  height: 30,
+                                  width: 30,
+                                ),
+                              );
+                          },
                             fit: BoxFit.cover,
                             width: 45,
                             height: 45,

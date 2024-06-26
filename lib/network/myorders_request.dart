@@ -20,6 +20,7 @@ Future<List<SingleOrder>?> networkMyOrders(int page,int oldOrder) async {
       Echo('key=$key value=$value');
     });
     Response response = await dio.get(kMyOrders,queryParameters: queryParameters).whenComplete(() {});
+    print('ssssee${response.toString()}');
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       JsonBasicResponse basicJsonResponse = JsonBasicResponse.fromJson(response.data);
@@ -33,6 +34,7 @@ Future<List<SingleOrder>?> networkMyOrders(int page,int oldOrder) async {
     } else {
       return Future.error('auth');
     }
+
   } on DioError catch (error) {
     return Future.error(networkHandleError(error));
   }

@@ -92,12 +92,12 @@ class _LoginControllerState extends State<LoginController> {
       if (basicJsonResponse.status == YemString.successNoTranslate) {
         final loginResponse = JsonLoginResponse.fromJson(response.data);
         YemenyPrefs prefs = YemenyPrefs();
-        await prefs.setUserName(loginResponse.data!.name!);
-        await prefs.setEmail(loginResponse.data!.email);
-        await prefs.setPhone(loginResponse.data!.phone!);
-        await prefs.setToken(loginResponse.data!.token!);
-        await prefs.setUserId('${loginResponse.data!.id}');
-        await prefs.setPhoto(loginResponse.data!.avatar);
+        await prefs.setUserName(loginResponse.data?.name??'');
+        await prefs.setEmail(loginResponse.data?.email??'');
+        await prefs.setPhone(loginResponse.data?.phone??'');
+        await prefs.setToken(loginResponse.data?.token??'');
+        await prefs.setUserId('${loginResponse.data?.id??0.0}');
+        await prefs.setPhoto(loginResponse.data?.avatar??'');
         await prefs
             .setIsTypeAdmin(loginResponse.data!.type == 0 ? true : false);
 
