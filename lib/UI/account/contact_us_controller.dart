@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:social_media_buttons/social_media_button.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../../provider/main_provider.dart';
 import 'email_edit_text.dart';
 import 'message_edit_text.dart';
 import 'name_edit_text.dart';
@@ -41,6 +43,9 @@ class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     profileModel = Provider.of<ProfileModel>(context, listen: false);
+    MainDataProvider mainDataProvider =
+    Provider.of<MainDataProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(YemString.contact_us, style: kWhiteTextColor),
@@ -66,71 +71,202 @@ class _ContactUsState extends State<ContactUs> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    child:
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: <Widget>[
+                    //     Flexible(
+                    //       flex: 1,
+                    //       child: AvatarGlow(
+                    //         glowColor: Color(0xFF0D47A1),
+                    //         child: Material(
+                    //           elevation: 8.0,
+                    //           shape: CircleBorder(),
+                    //           child: SocialMediaButton.snapchat(
+                    //             url: '',
+                    //             size: 35,
+                    //             color: Colors.blue[900],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     Flexible(
+                    //       flex: 1,
+                    //       child: AvatarGlow(
+                    //         glowColor: Colors.blue,
+                    //         child: Material(
+                    //           elevation: 8.0,
+                    //           shape: CircleBorder(),
+                    //           child: SocialMediaButton.twitter(
+                    //             url: '',
+                    //             size: 35,
+                    //             color: Colors.blue,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     Flexible(
+                    //       flex: 1,
+                    //       child: AvatarGlow(
+                    //         glowColor: Colors.blue,
+                    //         child: Material(
+                    //           elevation: 8.0,
+                    //           shape: CircleBorder(),
+                    //           child: SocialMediaButton.instagram(
+                    //             url: '',
+                    //             size: 35,
+                    //             color: Colors.blue,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     Flexible(
+                    //       flex: 1,
+                    //       child: AvatarGlow(
+                    //         glowColor: Colors.green,
+                    //         child: Material(
+                    //           elevation: 8.0,
+                    //           shape: CircleBorder(),
+                    //           child: SocialMediaButton.whatsapp(
+                    //             url: '',
+                    //             size: 35,
+                    //             color: Colors.green,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Flexible(
-                          flex: 1,
-                          child: AvatarGlow(
-                            glowColor: Color(0xFF0D47A1),
-                            child: Material(
-                              elevation: 8.0,
-                              shape: CircleBorder(),
-                              child: SocialMediaButton.snapchat(
-                                url: '',
-                                size: 35,
-                                color: Colors.blue[900],
+                        if (mainDataProvider.mainData != null &&
+                            mainDataProvider.mainData!.snapchat != null &&
+                            mainDataProvider.mainData!.snapchat!.isNotEmpty)
+                          Flexible(
+                            flex: 1,
+                            child: AvatarGlow(
+                              glowColor: Colors.green,
+                              child: InkWell(
+                                onTap: (){
+                                  launch('${mainDataProvider.mainData!.snapchat}');
+                                },
+                                child: Material(
+                                    elevation: 8.0,
+                                    shape: CircleBorder(),
+                                    child:Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset('assets/img/snapchat.webp',
+                                        width: 30,
+                                        height: 30,
+                                      ),
+                                    )
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: AvatarGlow(
-                            glowColor: Colors.blue,
-                            child: Material(
-                              elevation: 8.0,
-                              shape: CircleBorder(),
-                              child: SocialMediaButton.twitter(
-                                url: '',
-                                size: 35,
-                                color: Colors.blue,
+
+                        if (mainDataProvider.mainData != null &&
+                            mainDataProvider.mainData!.twitter != null &&
+                            mainDataProvider.mainData!.twitter!.isNotEmpty)
+                          Flexible(
+                            flex: 1,
+                            child: AvatarGlow(
+                              glowColor: Colors.green,
+                              child: InkWell(
+                                onTap: (){
+                                  launch('${mainDataProvider.mainData!.twitter}');
+                                },
+                                child: Material(
+                                    elevation: 8.0,
+                                    shape: CircleBorder(),
+                                    child:Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset('assets/img/twitter.png',
+                                        width: 35,
+                                        height: 35,
+                                      ),
+                                    )
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: AvatarGlow(
-                            glowColor: Colors.blue,
-                            child: Material(
-                              elevation: 8.0,
-                              shape: CircleBorder(),
-                              child: SocialMediaButton.instagram(
-                                url: '',
-                                size: 35,
-                                color: Colors.blue,
+
+                        if (mainDataProvider.mainData != null &&
+                            mainDataProvider.mainData!.instagram != null &&
+                            mainDataProvider.mainData!.instagram!.isNotEmpty)
+                          Flexible(
+                            flex: 1,
+                            child: AvatarGlow(
+                              glowColor: Colors.green,
+                              child: InkWell(
+                                onTap: (){
+                                  launch('${mainDataProvider.mainData!.instagram}');
+                                },
+                                child: Material(
+                                    elevation: 8.0,
+                                    shape: CircleBorder(),
+                                    child:Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset('assets/img/instegram.png',
+                                        // width: 35,
+                                        // height: 35,
+                                      ),
+                                    )
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          child: AvatarGlow(
-                            glowColor: Colors.green,
-                            child: Material(
-                              elevation: 8.0,
-                              shape: CircleBorder(),
-                              child: SocialMediaButton.whatsapp(
-                                url: '',
-                                size: 35,
-                                color: Colors.green,
+                        if (mainDataProvider.mainData != null &&
+                            mainDataProvider.mainData!.tiktok != null &&
+                            mainDataProvider.mainData!.tiktok!.isNotEmpty)
+                          Flexible(
+                            flex: 1,
+                            child: AvatarGlow(
+                              glowColor: Colors.black,
+
+                              child: GestureDetector(
+                                onTap: (){
+                                  launch('${mainDataProvider.mainData!.tiktok}');
+                                },
+                                child: Material(
+                                  elevation: 8.0,
+                                  shape: CircleBorder(),
+                                  child: Image.asset(
+                                    'assets/img/ic_tiktok.png',
+                                    width: 45,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                        if (mainDataProvider.mainData != null &&
+                            mainDataProvider.mainData!.whatsapp != null &&
+                            mainDataProvider.mainData!.whatsapp!.isNotEmpty)
+                          Flexible(
+                            flex: 1,
+                            child: AvatarGlow(
+                              glowColor: Colors.green,
+                              child: InkWell(
+                                onTap: (){
+                                  launch('${mainDataProvider.mainData!.whatsapp}');
+                                },
+                                child: Material(
+                                    elevation: 8.0,
+                                    shape: CircleBorder(),
+                                    child:Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Image.asset('assets/img/whats.png',
+                                        width: 35,
+                                        height: 35,
+                                      ),
+                                    )
+                                ),
+                              ),
+                            ),
+                          ),
                       ],
-                    ),
+                    )
                   ),
                 ],
               ),

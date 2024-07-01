@@ -22,6 +22,8 @@ import 'package:social_media_buttons/social_media_button.dart';
 import 'package:swipeable_page_route/swipeable_page_route.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../provider/main_provider.dart';
+
 class AccountView extends StatelessWidget {
   static String id = 'account';
   final String? title;
@@ -37,6 +39,8 @@ class AccountView extends StatelessWidget {
     ProfileModel profileModel = Provider.of<ProfileModel>(context, listen: false);
     Echo('${profileModel.tokenId}');
     Echo('${profileModel.name}');
+    MainDataProvider mainDataProvider =
+    Provider.of<MainDataProvider>(context, listen: false);
 
     return SafeArea(
       child: Scaffold(
@@ -308,15 +312,25 @@ class AccountView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      SocialMediaButton.whatsapp(
-                        url: '',
-                        onTap: () {},
-                        size: 35,
-                        color: Colors.green,
+                      InkWell(
+                        child: Image.asset('assets/img/whats.png',
+                          width: 30,
+                          height: 30,
+                        ),
+                        onTap: (){
+                          launch('${mainDataProvider.mainData!.whatsapp}');
+                        },
                       ),
+                      // SocialMediaButton.whatsapp(
+                      //   url: '',
+                      //   onTap: () {},
+                      //   size: 35,
+                      //   color: Colors.green,
+                      // ),
                       GestureDetector(
-                          onTap: () {
-                            launch('');
+                          onTap: () async{
+                            Uri telephoneUrl = Uri.parse("tel:${mainDataProvider.mainData!.phone}");
+                            await launchUrl(telephoneUrl);
                           },
                           child: Icon(
                             Icons.call,

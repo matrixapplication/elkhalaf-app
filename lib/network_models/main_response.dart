@@ -40,6 +40,7 @@ class MainData   {
     this.sliders,
     this.categories,
     this.products,
+    this.phone,
     this.whatsapp,
     this.instagram,
     this.tiktok,
@@ -57,6 +58,7 @@ class MainData   {
   String? whatsapp;
   String? instagram;
   String? tiktok;
+  String? phone;
   String? snapchat;
   String? twitter;
   String? about;
@@ -75,6 +77,7 @@ class MainData   {
     snapchat: json["snapchat"] == null ? null : json["snapchat"],
     tiktok: json["tiktok"] == null ? null : json["tiktok"],
     twitter: json["twitter"] == null ? null : json["twitter"],
+    phone: json["phone"] == null ? null : json["phone"],
     about: json["about"] == null ? null : json["about"],
     policy: json["policy"] == null ? null : json["policy"],
     contact: json["contact"] == null ? null : json["contact"],
@@ -89,6 +92,7 @@ class MainData   {
     "instagram": instagram == null ? null : instagram,
     "snapchat": snapchat == null ? null : snapchat,
     "twitter": twitter == null ? null : twitter,
+    "phone": phone == null ? null : phone,
     "about": about == null ? null : about,
     "policy": policy == null ? null : policy,
     "contact": contact == null ? null : contact,

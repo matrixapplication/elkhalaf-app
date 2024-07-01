@@ -117,6 +117,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               ),
             );
           }).toList(),
+     // SocialMediaButton.soundcloud()
 // Social links
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -127,56 +128,81 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 Flexible(
                   flex: 1,
                   child: AvatarGlow(
-                    glowColor: Colors.yellow,
-                    // endRadius: 40.0,
-                    child: Material(
-                      elevation: 8.0,
-                      shape: CircleBorder(),
-                        child: SocialMediaButton.snapchat(
-                        url: '${mainDataProvider.mainData!.snapchat}',
-                        size: 35,
-                        color: Colors.yellow,
+                    glowColor: Colors.green,
+                    child: InkWell(
+                      onTap: (){
+                        launch('${mainDataProvider.mainData!.snapchat}');
+                      },
+                      child: Material(
+                          elevation: 8.0,
+                          shape: CircleBorder(),
+                          child:Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/img/snapchat.webp',
+                              width: 30,
+                              height: 30,
+                            ),
+                          )
                       ),
                     ),
                   ),
                 ),
+
               if (mainDataProvider.mainData != null &&
                   mainDataProvider.mainData!.twitter != null &&
                   mainDataProvider.mainData!.twitter!.isNotEmpty)
                 Flexible(
                   flex: 1,
                   child: AvatarGlow(
-                    glowColor: Colors.blue,
-                    child: Material(
-                      elevation: 8.0,
-                      shape: CircleBorder(),
-                      child: SocialMediaButton.twitter(
-                        url: '${mainDataProvider.mainData!.twitter}',
-                        size: 35,
-                        color: Colors.blue,
+                    glowColor: Colors.green,
+                    child: InkWell(
+                      onTap: (){
+                        launch('${mainDataProvider.mainData!.twitter}');
+                      },
+                      child: Material(
+                          elevation: 8.0,
+                          shape: CircleBorder(),
+                          child:Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/img/twitter.png',
+                              width: 35,
+                              height: 35,
+                            ),
+                          )
                       ),
                     ),
                   ),
                 ),
+
               if (mainDataProvider.mainData != null &&
                   mainDataProvider.mainData!.instagram != null &&
                   mainDataProvider.mainData!.instagram!.isNotEmpty)
                 Flexible(
                   flex: 1,
                   child: AvatarGlow(
-                    glowColor: Colors.orange,
-                    child: Material(
-                      elevation: 8.0,
-                      shape: CircleBorder(),
-                      child: SocialMediaButton.instagram(
-                        url: '${mainDataProvider.mainData!.instagram}',
-                        size: 35,
-                        color: Colors.orange,
+                    glowColor: Colors.green,
+                    child: InkWell(
+                      onTap: (){
+                        launch('${mainDataProvider.mainData!.instagram}');
+                      },
+                      child: Material(
+                          elevation: 8.0,
+                          shape: CircleBorder(),
+                          child:Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset('assets/img/instegram.png',
+                              // width: 35,
+                              // height: 35,
+                            ),
+                          )
                       ),
                     ),
                   ),
                 ),
-              Flexible(
+              if (mainDataProvider.mainData != null &&
+                  mainDataProvider.mainData!.tiktok != null &&
+                  mainDataProvider.mainData!.tiktok!.isNotEmpty)
+               Flexible(
                 flex: 1,
                 child: AvatarGlow(
                   glowColor: Colors.black,
@@ -203,13 +229,20 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   flex: 1,
                   child: AvatarGlow(
                     glowColor: Colors.green,
-                    child: Material(
-                      elevation: 8.0,
-                      shape: CircleBorder(),
-                      child: SocialMediaButton.whatsapp(
-                        url: '${mainDataProvider.mainData!.whatsapp}',
-                        size: 35,
-                        color: Colors.green,
+                    child: InkWell(
+                      onTap: (){
+                        launch('${mainDataProvider.mainData!.whatsapp}');
+                      },
+                      child: Material(
+                        elevation: 8.0,
+                        shape: CircleBorder(),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset('assets/img/whats.png',
+                            width: 35,
+                            height: 35,
+                          ),
+                        )
                       ),
                     ),
                   ),
@@ -217,6 +250,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             ],
           )
         ],
+
       ),
     );
   }
