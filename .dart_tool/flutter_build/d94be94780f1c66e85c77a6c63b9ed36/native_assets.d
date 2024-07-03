@@ -1,0 +1,1 @@
+ E:\\matrix\\el-khalaf-app.git\\.dart_tool\\flutter_build\\d94be94780f1c66e85c77a6c63b9ed36\\native_assets.yaml: 
