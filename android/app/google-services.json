@@ -1,110 +1,26 @@
 {
   "project_info": {
-    "project_number": "541616388056",
-    "project_id": "matrixclouds-apps",
-    "storage_bucket": "matrixclouds-apps.appspot.com"
+    "project_number": "208439109542",
+    "project_id": "alkhalafsheep",
+    "storage_bucket": "alkhalafsheep.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:541616388056:android:31eed60f9fea67cd3524ad",
+        "mobilesdk_app_id": "1:208439109542:android:72e770f45f95161bc39167",
         "android_client_info": {
           "package_name": "com.matrixclouds.alkhalafsheep"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "541616388056-0qp0n5mjaof5oop67ivncqb07iih7ugl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyClzB7lcCE9boBvWZO56dzAS3g_K-hB7rw"
+          "current_key": "AIzaSyBZjpCoBwAouuIUYudKzX0HgmuOamGQ6EY"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "541616388056-0qp0n5mjaof5oop67ivncqb07iih7ugl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:541616388056:android:c8b3bc1a17bed00d3524ad",
-        "android_client_info": {
-          "package_name": "com.matrixclouds.cookiesplanet"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "541616388056-ina9sdhm8dhe2ihp2cfuljm4142haed4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.matrixclouds.cookiesplanet",
-            "certificate_hash": "e6bd6eb883c3b0dc40e5a58182ac2ac3d8c78f57"
-          }
-        },
-        {
-          "client_id": "541616388056-0qp0n5mjaof5oop67ivncqb07iih7ugl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyClzB7lcCE9boBvWZO56dzAS3g_K-hB7rw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "541616388056-0qp0n5mjaof5oop67ivncqb07iih7ugl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:541616388056:android:f52fd93e0bb005873524ad",
-        "android_client_info": {
-          "package_name": "com.ziydia.app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "541616388056-2d90o1kk4lhiu5dogevqg4vh8l4o4ks7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.ziydia.app",
-            "certificate_hash": "0fd5d82f0d79a6a01eea651ac0925cadd9b71ae5"
-          }
-        },
-        {
-          "client_id": "541616388056-0qp0n5mjaof5oop67ivncqb07iih7ugl.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyClzB7lcCE9boBvWZO56dzAS3g_K-hB7rw"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "541616388056-0qp0n5mjaof5oop67ivncqb07iih7ugl.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
