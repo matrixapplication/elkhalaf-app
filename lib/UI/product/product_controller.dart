@@ -21,7 +21,6 @@ class ProductController extends StatefulWidget {
   @override
   _ProductControllerState createState() => _ProductControllerState();
 }
-
 class _ProductControllerState extends State<ProductController> {
   List<Option?> cartOptions = [];
 

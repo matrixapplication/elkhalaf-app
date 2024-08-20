@@ -26,6 +26,7 @@ void main() async {
     useOnlyLangCode: true,
   ));
 }
+// Push ios 20/8
 LatLng? appLatLng ;
 class MyApp extends StatefulWidget {
   @override

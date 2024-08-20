@@ -81,7 +81,7 @@ class _CartProviderControllerState extends State<CartProviderController> {
                   backgroundColor: kPrimaryColor,
                   title: Text(YemString.cart, style: kWhiteTextColor),
                 ),
-          body:  cartProducts!.length > 0
+          body: cartProducts!=null&& cartProducts!.length > 0
                   ? Padding(
                       padding: const EdgeInsets.only(bottom: 26),
                       child: Column(

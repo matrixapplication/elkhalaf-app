@@ -122,8 +122,7 @@ class _MyOrdersControllerState extends State<MyOrdersController> {
                           if (snapshot.hasData) {
                             //show orders
                             if (snapshot.data!.length > 0)
-                              return Text('sdsdadd');
-                              // return MyOrdersView(myOrdersList: snapshot.data, controller: controller);
+                              return MyOrdersView(myOrdersList: snapshot.data, controller: controller);
                             else
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

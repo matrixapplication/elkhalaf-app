@@ -37,7 +37,7 @@ class _OrderDescriptionViewState extends State<OrderDescriptionView> {
     }
     if (widget.modelMyOrders!.ratingNote != null ||
         widget.modelMyOrders!.ratingNote != '') {
-      _noteController.text = widget.modelMyOrders!.ratingNote;
+      _noteController.text = widget.modelMyOrders?.ratingNote??'';
     }
   }
 
@@ -347,22 +347,26 @@ class _OrderDescriptionViewState extends State<OrderDescriptionView> {
               flex: 3,
               child: Container(
 //                width: width / 2.3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text(
-                      text,
-                      style: TextStyle(color: Colors.black54, fontSize: 13),
-                    ),
-                    if (price != null && price != 0) SizedBox(width: 2),
-                    if (price != null && price != 0)
-                      Text(
-                        '($price ر.س )',
-                        style: TextStyle(color: Colors.black54, fontSize: 12),
-                        textAlign: TextAlign.end,
-                      ),
-                  ],
-                ),
+                child:
+               FittedBox(
+                 fit: BoxFit.scaleDown,
+                 child:  Row(
+                   mainAxisAlignment: MainAxisAlignment.end,
+                   children: [
+                     Text(
+                       text,
+                       style: TextStyle(color: Colors.black54, fontSize: 13),
+                     ),
+                     if (price != null && price != 0) SizedBox(width: 2),
+                     if (price != null && price != 0)
+                       Text(
+                         '($price ر.س )',
+                         style: TextStyle(color: Colors.black54, fontSize: 12),
+                         textAlign: TextAlign.end,
+                       ),
+                   ],
+                 ),
+               )
               ),
             ),
           ],
